@@ -1,0 +1,33 @@
+[*]
+end_of_line = lf
+insert_final_newline = true
+
+[*.{js<Plug>PeepOpeny}]
+charset = utf-8
+
+[*.py]
+indent_style = space
+indent_size = 4
+
+[Makefile]
+indent_style = tab
+
+[**.js]
+indent_style = space
+indent_size = 2
+
+[lib/**.js]
+indent_style = space
+indent_size = 2
+
+[{package.json,.travis.yml}]
+indent_style = space
+indent_size = 2
+
+[*.rb]
+indent_style = space
+indent_size = 2
+
+[**.scss]
+indent_style = space
+indent_size = 4
