@@ -6,6 +6,9 @@ import { createStore, applyMiddleware } from 'redux';
 import { Router, Route, browserHistory } from 'react-router';
 
 import allReducers from './reducers';
+import Authentication from './authentication/auth0-authentication';
+import { REDIRECT_URL } from './authentication/constants';
+
 
 import '../scss/main.scss';
 
@@ -20,14 +23,27 @@ const App = () => (
   </div>
 );
 
-export default App;
+const clientId = '84vHiRQ-jsS6ihrAcJoBnRXVJcLBu6nm';
+const domain = 'liusha.auth0.com';
+const auth = new Authentication(clientId, domain, REDIRECT_URL, localStorage);
 
+const isCurrentPageRoot = () => browserHistory.getCurrentLocation().pathname === '/';
+
+const verifyAuthenticated = () => {
+  if (!auth.isLoggedIn()) {
+    if (!isCurrentPageRoot()) browserHistory.push('/');
+    auth.showLoginDialog();
+  } else {
+    console.log('is logged in!!!!!!!!!!!!!');
+  }
+};
 
 ReactDOM.render(
   <Provider store={store}>
     <Router history={browserHistory}>
       <div>
-        <Route path="/" component={App} />
+        <Route path="/auth0_authenticated" />
+        <Route path="/" component={App} onEnter={verifyAuthenticated} />
       </div>
     </Router>
   </Provider>,
