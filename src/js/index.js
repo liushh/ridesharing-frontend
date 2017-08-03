@@ -9,18 +9,15 @@ import allReducers from './reducers';
 import Authentication from './authentication/auth0-authentication';
 import { REDIRECT_URL } from './authentication/constants';
 
+import App from './containers/App';
+import Trips from './containers/Trips';
+
 
 import '../scss/main.scss';
 
 const store = createStore(
   allReducers,
   applyMiddleware(thunk)
-);
-
-const App = () => (
-  <div className="app">
-    Hello World!
-  </div>
 );
 
 const clientId = '84vHiRQ-jsS6ihrAcJoBnRXVJcLBu6nm';
@@ -43,7 +40,9 @@ ReactDOM.render(
     <Router history={browserHistory}>
       <div>
         <Route path="/auth0_authenticated" />
-        <Route path="/" component={App} onEnter={verifyAuthenticated} />
+        <Route path="/" component={App} onEnter={verifyAuthenticated} >
+          <Route path="/trips" component={Trips} />
+        </Route>
       </div>
     </Router>
   </Provider>,
