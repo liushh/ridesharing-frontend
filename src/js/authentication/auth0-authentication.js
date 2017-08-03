@@ -2,7 +2,7 @@ import jwtDecode from 'jwt-decode';
 import Auth0Lock from 'auth0-lock';
 
 import Redirector from './redirector';
-// import client from '../client';
+import client from '../client';
 
 
 const AUTHENTICATED_EVENT = 'authenticated';
@@ -19,7 +19,7 @@ export default class Auth0Authentication {
     this.redirector = new Redirector();
     this._setUpEventListeners();
 
-    // client.defaults.headers.common.Authorization = this.getToken();
+    client.defaults.headers.common.Authorization = this.getToken();
   }
 
   _setUpEventListeners() {
@@ -35,7 +35,7 @@ export default class Auth0Authentication {
   }
 
   setToken(idToken) {
-    // client.defaults.headers.common.Authorization = idToken;
+    client.defaults.headers.common.Authorization = idToken;
     this.localStorage.setItem(TOKEN_STORE_KEY, idToken);
   }
 
@@ -72,7 +72,7 @@ export default class Auth0Authentication {
   }
 
   logout() {
-    // client.defaults.headers.common.Authorization = '';
+    client.defaults.headers.common.Authorization = '';
     this.localStorage.removeItem(TOKEN_STORE_KEY);
   }
 
