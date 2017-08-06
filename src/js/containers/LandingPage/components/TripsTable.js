@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
 import ReactDataGrid from 'react-data-grid';
 
 
-class Trips extends Component {
+class TripsTable extends Component {
   constructor(props) {
-    console.log('props = ', props);
     super(props);
     this.props = props;
     this.columns = [
@@ -47,19 +45,13 @@ class Trips extends Component {
         columns={this.columns}
         rowGetter={this.rowGetter.bind(this)}
         rowsCount={this.props.trips.length}
-        minHeight={500} />);
+        minHeight={500} />
+    );
   }
 }
 
-Trips.propTypes = {
+TripsTable.propTypes = {
   trips: PropTypes.array
 };
 
-const mapStateToProps = state => {
-  console.log('trips = ', state.trips);
-  return {
-    trips: state.trips
-  };
-};
-
-export default connect(mapStateToProps)(Trips);
+export default TripsTable;

@@ -10,8 +10,7 @@ import Authentication from './authentication/auth0-authentication';
 import { REDIRECT_URL } from './authentication/constants';
 
 import App from './containers/App';
-import Trips from './containers/Trips';
-
+import LandingPage from './containers/LandingPage';
 
 import '../scss/main.scss';
 
@@ -40,7 +39,7 @@ ReactDOM.render(
       <div>
         <Route path="/auth0_authenticated" />
         <Route path="/" component={App} onEnter={verifyAuthenticated} >
-          <Route path="/trips" component={Trips} />
+          <Route path="/trips" component={LandingPage} />
         </Route>
       </div>
     </Router>
