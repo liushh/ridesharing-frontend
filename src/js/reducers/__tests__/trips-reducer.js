@@ -23,7 +23,7 @@ describe('Test sample reducer', () => {
         destination: {
           is_office: false,
           zipcode: '12345',
-          colonia: 'americana'
+          colonia: 'Americana'
         }
       }
     ];

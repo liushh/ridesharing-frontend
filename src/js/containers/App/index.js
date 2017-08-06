@@ -2,6 +2,7 @@ import React from 'react';
 
 const App = ({ children }) => (
   <div>
+    <h1>WizePool</h1>
     {children}
   </div>
 );

@@ -30,9 +30,8 @@ const verifyAuthenticated = () => {
   if (!auth.isLoggedIn()) {
     if (!isCurrentPageRoot()) browserHistory.push('/');
     auth.showLoginDialog();
-  } else {
-    console.log('is logged in!!!!!!!!!!!!!');
   }
+  return true;
 };
 
 ReactDOM.render(
