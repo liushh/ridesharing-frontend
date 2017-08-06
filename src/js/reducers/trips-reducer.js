@@ -13,6 +13,51 @@ const defaultTrips = [
       zipcode: '12345',
       colonia: 'americana'
     }
+  },
+  {
+    name: 'Liusha',
+    email: 'liusha@wizeline.com',
+    phone: '12345678',
+    origin: {
+      is_office: true,
+      zipcode: '12345',
+      colonia: 'americana'
+    },
+    destination: {
+      is_office: false,
+      zipcode: '12345',
+      colonia: 'americana'
+    }
+  },
+  {
+    name: 'Liusha',
+    email: 'liusha@wizeline.com',
+    phone: '12345678',
+    origin: {
+      is_office: true,
+      zipcode: '12345',
+      colonia: 'americana'
+    },
+    destination: {
+      is_office: false,
+      zipcode: '12345',
+      colonia: 'americana'
+    }
+  },
+  {
+    name: 'Liusha',
+    email: 'liusha@wizeline.com',
+    phone: '12345678',
+    origin: {
+      is_office: true,
+      zipcode: '12345',
+      colonia: 'americana'
+    },
+    destination: {
+      is_office: false,
+      zipcode: '12345',
+      colonia: 'americana'
+    }
   }
 ];
 
