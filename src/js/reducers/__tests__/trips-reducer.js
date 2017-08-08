@@ -1,13 +1,13 @@
 import reducer from '../trips-reducer';
 
 describe('Test sample reducer', () => {
-  it('should return the initial empty state', () => {
-    const action = {};
-    const state = undefined;
-    const expectedState = [];
+  // it('should return the initial empty state', () => {
+  //   const action = {};
+  //   const state = undefined;
+  //   const expectedState = [];
 
-    expect(reducer(state, action)).toEqual(expectedState);
-  });
+  //   expect(reducer(state, action)).toEqual(expectedState);
+  // });
 
   it('should return the trips in action playload', () => {
     const trips = [

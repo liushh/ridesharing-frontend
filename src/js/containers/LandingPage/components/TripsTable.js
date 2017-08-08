@@ -39,13 +39,26 @@ class TripsTable extends Component {
     return formatedLocation;
   }
 
-  render() {
+  _getFilterSection() {
     return (
-      <ReactDataGrid
-        columns={this.columns}
-        rowGetter={this.rowGetter.bind(this)}
-        rowsCount={this.props.trips.length}
-        minHeight={500} />
+      <div className="filters-container">
+        <div className="filter">All trips</div>
+        <div className="filter">Close to mine</div>
+      </div>
+    );
+  }
+
+  render() {
+    const filterSection = this._getFilterSection();
+    return (
+      <div>
+        {filterSection}
+        <ReactDataGrid
+          columns={this.columns}
+          rowGetter={this.rowGetter.bind(this)}
+          rowsCount={this.props.trips.length}
+          minHeight={500} />
+      </div>
     );
   }
 }

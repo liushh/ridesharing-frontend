@@ -1,0 +1,27 @@
+.edit-trip-container {
+  margin: 15px;
+  border: 1px solid;
+}
+
+.edit-trip-row {
+  display: flex;
+  height: 50px;
+
+  .cell {
+    flex: 1;
+    margin: 10px;
+  }
+}
+
+.action-buttons {
+  display: flex;
+  padding: 10px;
+  height: 100px;
+
+  .button {
+    text-align: center;
+    flex: 1;
+    margin: 5px;
+    border: 1px solid;
+  }
+}
