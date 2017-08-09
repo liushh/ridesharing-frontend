@@ -1,7 +1,6 @@
 const CREATE_TRIP = 'CREATE_TRIP';
 
 const createDriverTrip = () => {
-  console.log('createDriverTrip!!!!!!!!!!!!');
   return {
     type: CREATE_TRIP,
     isDriver: true
@@ -9,7 +8,6 @@ const createDriverTrip = () => {
 };
 
 const createRiderTrip = () => {
-  console.log('createRiderTrip ~~~~~~~~~~~~~~~~~~~~~~~');
   return {
     type: CREATE_TRIP,
     isDriver: false

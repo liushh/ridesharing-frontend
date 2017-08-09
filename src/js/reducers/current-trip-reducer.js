@@ -21,8 +21,11 @@ export default function CurrentTripReducer(state = null, action) {
     case CREATE_TRIP:
       const currentTrip = emptyTrip;
       currentTrip.isDriver = action.isDriver;
-      console.log('currentTrip = ', currentTrip);
       return currentTrip;
+    case CANCEL_CURRENT_TRIP:
+      return null;
+    case SAVE_CURRENT_TRIP:
+      return null;
     default:
       return null;
   }

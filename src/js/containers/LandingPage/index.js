@@ -7,6 +7,8 @@ import TripsTable from './components/TripsTable';
 import EditTrip from './components/EditTrip';
 import { createDriverTrip,
          createRiderTrip } from '../../actions/create-trip';
+import { cancelCurrentTrip } from '../../actions/cancel-current-trip';
+import { saveCurrentTrip } from '../../actions/save-current-trip';
 
 
 const LandingPage = props => (
@@ -14,16 +16,22 @@ const LandingPage = props => (
     <AddTripButtons
       createDriverTrip={props.createDriverTrip}
       createRiderTrip={props.createRiderTrip} />
-    {(props.currentTrip != null) ? <EditTrip currentTrip={props.currentTrip} /> : null}
+    {(props.currentTrip != null) ?
+      <EditTrip currentTrip={props.currentTrip}
+                cancelCurrentTrip={props.cancelCurrentTrip}
+                saveCurrentTrip={props.saveCurrentTrip} /> :
+       null}
     <TripsTable trips={props.trips} />
   </div>
 );
 
 LandingPage.propTypes = {
   trips: PropTypes.array,
-  isCreatingTrip: PropTypes.bool,
-  isEditingTrip: PropTypes.bool,
-  createTrip: PropTypes.func
+  currentTrip: PropTypes.object,
+  createDriverTrip: PropTypes.func,
+  createRiderTrip: PropTypes.func,
+  saveCurrentTrip: PropTypes.func,
+  cancelCurrentTrip: PropTypes.func
 };
 
 const mapStateToProps = state => {
@@ -37,7 +45,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToComponent = dispatch => ({
   createDriverTrip: () => dispatch(createDriverTrip()),
-  createRiderTrip: () => dispatch(createRiderTrip())
+  createRiderTrip: () => dispatch(createRiderTrip()),
+  saveCurrentTrip: () => dispatch(saveCurrentTrip()),
+  cancelCurrentTrip: () => dispatch(cancelCurrentTrip())
 });
 
 export default connect(mapStateToProps, mapDispatchToComponent)(LandingPage);

@@ -1,11 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 
-const AddTripButtons = props => (
+const AddTripButtons = ({ createDriverTrip, createRiderTrip }) => (
   <div className="buttons-container">
-    <div role="button" className="button" onClick={props.createDriverTrip}>I can drive</div>
-    <div className="button" onClick={props.createRiderTrip}>Need a ride or Uber</div>
+    <div className="button" role="button" onClick={createDriverTrip}>I can drive</div>
+    <div className="button" role="button" onClick={createRiderTrip}>Need a ride or Uber</div>
   </div>
 );
+
+AddTripButtons.propTypes = {
+  currentTrip: PropTypes.object,
+  createDriverTrip: PropTypes.func,
+  createRiderTrip: PropTypes.func
+};
+
 
 export default AddTripButtons;

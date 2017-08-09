@@ -1,6 +1,10 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const EditTrip = ({ currentTrip }) => (
+const EditTrip = ({ currentTrip,
+                    cancelCurrentTrip,
+                    saveCurrentTrip }) => (
+
   <div className="edit-trip-container">
     <div className="edit-trip-row">
       <div className="cell">Destination</div>
@@ -18,10 +22,16 @@ const EditTrip = ({ currentTrip }) => (
     </div>
 
     <div className="action-buttons">
-      <div className="button">Cancel</div>
-      <div className="button">Save</div>
+      <div className="button" role="button" onClick={cancelCurrentTrip}>Cancel</div>
+      <div className="button" role="button" onClick={saveCurrentTrip}>Save</div>
     </div>
   </div>
 );
+
+EditTrip.propTypes = {
+  currentTrip: PropTypes.object,
+  saveCurrentTrip: PropTypes.func,
+  cancelCurrentTrip: PropTypes.func
+};
 
 export default EditTrip;
