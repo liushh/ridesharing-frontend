@@ -21,6 +21,27 @@ class EditTrip extends Component {
     this.setState(stateObject);
   }
 
+  _saveCurrentTrip() {
+    console.log('this = ', this);
+    const currentTrip = {
+      name: 'LiushaAdded',
+      email: 'liusha@wizeline.com',
+      phone: '12345678',
+      origin: {
+        is_office: true,
+        zipcode: '12345',
+        colonia: 'americana'
+      },
+      destination: {
+        is_office: false,
+        zipcode: '12345',
+        colonia: 'americana'
+      }
+    };
+
+    this.props.saveCurrentTrip(currentTrip);
+  }
+
   render() {
     return (
       <div className="edit-trip-container">
@@ -56,7 +77,7 @@ class EditTrip extends Component {
 
         <div className="action-buttons">
           <div className="button" role="button" onClick={this.props.cancelCurrentTrip}>Cancel</div>
-          <div className="button" role="button" onClick={this.props.saveCurrentTrip}>Save</div>
+          <div className="button" role="button" onClick={this._saveCurrentTrip.bind(this)}>Save</div>
         </div>
       </div>
     );

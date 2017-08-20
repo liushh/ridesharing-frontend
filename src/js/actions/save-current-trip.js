@@ -1,8 +1,9 @@
 const SAVE_CURRENT_TRIP = 'SAVE_CURRENT_TRIP';
 
-const saveCurrentTrip = () => {
+const saveCurrentTrip = currentTrip => {
   return {
-    type: SAVE_CURRENT_TRIP
+    type: SAVE_CURRENT_TRIP,
+    currentTrip
   };
 };
 

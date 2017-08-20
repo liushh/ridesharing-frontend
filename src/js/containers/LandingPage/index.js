@@ -17,9 +17,10 @@ const LandingPage = props => (
       createDriverTrip={props.createDriverTrip}
       createRiderTrip={props.createRiderTrip} />
     {(props.currentTrip != null) ?
-      <EditTrip currentTrip={props.currentTrip}
-                cancelCurrentTrip={props.cancelCurrentTrip}
-                saveCurrentTrip={props.saveCurrentTrip} /> : null}
+      <EditTrip
+        currentTrip={props.currentTrip}
+        cancelCurrentTrip={props.cancelCurrentTrip}
+        saveCurrentTrip={props.saveCurrentTrip} /> : null}
     <TripsTable trips={props.trips} />
   </div>
 );
@@ -43,9 +44,9 @@ const mapStateToProps = state => {
 };
 
 const mapDispatchToComponent = dispatch => ({
-  createDriverTrip: () => dispatch(createDriverTrip()),
-  createRiderTrip: () => dispatch(createRiderTrip()),
-  saveCurrentTrip: () => dispatch(saveCurrentTrip()),
+  createDriverTrip: currentTrip => dispatch(createDriverTrip(currentTrip)),
+  createRiderTrip: currentTrip => dispatch(createRiderTrip(currentTrip)),
+  saveCurrentTrip: currentTrip => dispatch(saveCurrentTrip(currentTrip)),
   cancelCurrentTrip: () => dispatch(cancelCurrentTrip())
 });
 

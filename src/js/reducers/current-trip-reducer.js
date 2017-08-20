@@ -1,18 +1,21 @@
 import { CREATE_TRIP } from '../actions/create-trip';
+import { CANCEL_CURRENT_TRIP } from '../actions/cancel-current-trip';
+import { SAVE_CURRENT_TRIP } from '../actions/save-current-trip';
 
 const emptyTrip = {
-  name: 'Liusha',
-  email: 'liusha@wizeline.com',
-  phone: '1234567890',
+  isDriver: true,
+  name: '',
+  email: '',
+  phone: '',
   origin: {
     is_office: true,
-    zipcode: '54321',
-    colonia: 'Jardin de sol'
+    zipcode: '',
+    colonia: ''
   },
   destination: {
     is_office: false,
-    zipcode: '12345',
-    colonia: 'Americana'
+    zipcode: '',
+    colonia: ''
   }
 };
 
@@ -23,9 +26,7 @@ export default function CurrentTripReducer(state = null, action) {
       currentTrip.isDriver = action.isDriver;
       return currentTrip;
     case CANCEL_CURRENT_TRIP:
-      return null;
     case SAVE_CURRENT_TRIP:
-      return null;
     default:
       return null;
   }

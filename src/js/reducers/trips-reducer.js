@@ -1,3 +1,5 @@
+import { SAVE_CURRENT_TRIP } from '../actions/save-current-trip';
+
 const defaultTrips = [
   {
     name: 'Liusha',
@@ -66,7 +68,10 @@ export default function tripsReducer(state = defaultTrips, action) {
   switch (action.type) {
     case 'TRIPS_LOADED':
       return action.payload;
+    case SAVE_CURRENT_TRIP:
+      state.push(action.currentTrip);
+      return Object.assign([], state);
     default:
-      return defaultTrips;
+      return state;
   }
 }
