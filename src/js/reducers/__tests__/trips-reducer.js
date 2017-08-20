@@ -1,4 +1,5 @@
 import reducer from '../trips-reducer';
+import { SAVE_CURRENT_TRIP } from '../../actions/save-current-trip';
 
 describe('Test sample reducer', () => {
   // it('should return the initial empty state', () => {
@@ -35,5 +36,31 @@ describe('Test sample reducer', () => {
     const expectedState = trips;
 
     expect(reducer(state, action)).toEqual(expectedState);
+  });
+
+  it('should return new trips with new added current trips', () => {
+    const currentTrip = {
+      isDriver: false,
+      name: '',
+      email: '',
+      phone: '',
+      origin: {
+        is_office: true,
+        zipcode: '',
+        colonia: ''
+      },
+      destination: {
+        is_office: false,
+        zipcode: '',
+        colonia: ''
+      }
+    };
+    const action = {
+      type: SAVE_CURRENT_TRIP,
+      currentTrip
+    };
+    const expectedState = [currentTrip];
+
+    expect(reducer([], action)).toEqual(expectedState);
   });
 });

@@ -78,9 +78,27 @@ describe('Test create-trip-reducer', () => {
   });
 
   it('should return currentTrip as null', () => {
+    const currentTrip = {
+      isDriver: false,
+      name: '',
+      email: '',
+      phone: '',
+      origin: {
+        is_office: true,
+        zipcode: '',
+        colonia: ''
+      },
+      destination: {
+        is_office: false,
+        zipcode: '',
+        colonia: ''
+      }
+    };
     const expectedState = null;
+
     const action = {
-      type: SAVE_CURRENT_TRIP
+      type: SAVE_CURRENT_TRIP,
+      currentTrip
     };
 
     expect(reducer(null, action)).toEqual(expectedState);

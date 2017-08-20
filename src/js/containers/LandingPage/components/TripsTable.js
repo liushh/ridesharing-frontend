@@ -44,6 +44,7 @@ class TripsTable extends Component {
       <div className="filters-container">
         <div className="filter">All trips</div>
         <div className="filter">Close to mine</div>
+        <div className="filter">My trips</div>
       </div>
     );
   }
