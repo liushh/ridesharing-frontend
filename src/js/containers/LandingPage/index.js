@@ -35,8 +35,6 @@ LandingPage.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log('state.trips = ', state.trips);
-  console.log('state.currentTrip = ', state.currentTrip);
   return {
     trips: state.trips,
     currentTrip: state.currentTrip

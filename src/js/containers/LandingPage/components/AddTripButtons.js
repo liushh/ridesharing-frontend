@@ -10,10 +10,8 @@ const AddTripButtons = ({ createDriverTrip, createRiderTrip }) => (
 );
 
 AddTripButtons.propTypes = {
-  currentTrip: PropTypes.object,
   createDriverTrip: PropTypes.func,
   createRiderTrip: PropTypes.func
 };
-
 
 export default AddTripButtons;
