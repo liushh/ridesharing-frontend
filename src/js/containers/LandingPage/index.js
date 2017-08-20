@@ -19,8 +19,7 @@ const LandingPage = props => (
     {(props.currentTrip != null) ?
       <EditTrip currentTrip={props.currentTrip}
                 cancelCurrentTrip={props.cancelCurrentTrip}
-                saveCurrentTrip={props.saveCurrentTrip} /> :
-       null}
+                saveCurrentTrip={props.saveCurrentTrip} /> : null}
     <TripsTable trips={props.trips} />
   </div>
 );
