@@ -3,7 +3,7 @@ const SHOW_ALL_TRIPS = 'SHOW_ALL_TRIPS';
 const showAllTrips = () => {
   return {
     type: SHOW_ALL_TRIPS,
-    tripFilter: 'allTrips'
+    tripFilter: SHOW_ALL_TRIPS
   };
 };
 

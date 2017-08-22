@@ -4,7 +4,7 @@ describe('Test show-my-trips action', () => {
   it('should return SHOW_MY_TRIPS action', () => {
     const expectedAction = {
       type: SHOW_MY_TRIPS,
-      tripFilter: 'myTrips'
+      tripFilter: SHOW_MY_TRIPS
     };
 
     const action = showMyTrips();

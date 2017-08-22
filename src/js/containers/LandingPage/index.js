@@ -45,7 +45,11 @@ const mapDispatchToComponent = dispatch => ({
   createDriverTrip: currentTrip => dispatch(createDriverTrip(currentTrip)),
   createRiderTrip: currentTrip => dispatch(createRiderTrip(currentTrip)),
   saveCurrentTrip: currentTrip => dispatch(saveCurrentTrip(currentTrip)),
-  cancelCurrentTrip: () => dispatch(cancelCurrentTrip())
+  cancelCurrentTrip: () => dispatch(cancelCurrentTrip()),
+
+  showAllTrips: () => dispatch(showAllTrips()),
+  showTripsClosedToMine: () => showTripsClosedToMine(showMineTrips()),
+  showMineTrips: () => dispatch(showMineTrips())
 });
 
 export default connect(mapStateToProps, mapDispatchToComponent)(LandingPage);

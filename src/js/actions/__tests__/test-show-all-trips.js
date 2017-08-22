@@ -4,7 +4,7 @@ describe('Test show-all-trips action', () => {
   it('should return SHOW_ALL_TRIPS action', () => {
     const expectedAction = {
       type: SHOW_ALL_TRIPS,
-      tripFilter: 'allTrips'
+      tripFilter: SHOW_ALL_TRIPS
     };
 
     const action = showAllTrips();

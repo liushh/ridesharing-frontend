@@ -3,7 +3,7 @@ const SHOW_MY_TRIPS = 'SHOW_MY_TRIPS';
 const showMyTrips = () => {
   return {
     type: SHOW_MY_TRIPS,
-    tripFilter: 'myTrips'
+    tripFilter: SHOW_MY_TRIPS
   };
 };
 
