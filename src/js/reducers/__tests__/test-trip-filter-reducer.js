@@ -5,15 +5,19 @@ import { SHOW_TRIPS_CLOSED_TO_MINE, showTripsClosedToMine } from '../../actions/
 
 
 describe('Test trip filter reducer', () => {
-  it('should return initial state=SHOW_ALL_TRIPS ', () => {
+  it('should return initial state=SHOW_ALL_TRIPS without action', () => {
     expect(reducer(null, showAllTrips())).toEqual(SHOW_ALL_TRIPS);
   });
 
-  it('should return initial state=SHOW_MY_TRIPS ', () => {
+  it('should return initial state=SHOW_ALL_TRIPS with showAllTrips action', () => {
+    expect(reducer(null, showAllTrips())).toEqual(SHOW_ALL_TRIPS);
+  });
+
+  it('should return state=SHOW_MY_TRIPS with showMyTrips action', () => {
     expect(reducer(null, showMyTrips())).toEqual(SHOW_MY_TRIPS);
   });
 
-  it('should return initial state=SHOW_TRIPS_CLOSED_TO_MINE ', () => {
+  it('should return state=SHOW_TRIPS_CLOSED_TO_MINE with showTripsClosedToMine action', () => {
     expect(reducer(null, showTripsClosedToMine())).toEqual(SHOW_TRIPS_CLOSED_TO_MINE);
   });
 });

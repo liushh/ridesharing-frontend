@@ -42,9 +42,9 @@ class TripsTable extends Component {
   _getFilterSection() {
     return (
       <div className="filters-container">
-        <div className="filter">All trips</div>
-        <div className="filter">Close to mine</div>
-        <div className="filter">My trips</div>
+        <div className="filter" role="button" onClick={this.props.showAllTrips}>All trips</div>
+        <div className="filter" role="button" onClick={this.props.showTripsClosedToMine}>Close to mine</div>
+        <div className="filter" role="button" onClick={this.props.showMyTrips}>My trips</div>
       </div>
     );
   }
@@ -65,7 +65,10 @@ class TripsTable extends Component {
 }
 
 TripsTable.propTypes = {
-  trips: PropTypes.array
+  trips: PropTypes.array,
+  showAllTrips: PropTypes.func,
+  showMyTrips: PropTypes.func,
+  showTripsClosedToMine: PropTypes.func
 };
 
 export default TripsTable;

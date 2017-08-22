@@ -17,8 +17,8 @@ const defaultTrips = [
     }
   },
   {
-    name: 'Liusha',
-    email: 'liusha@wizeline.com',
+    name: 'Beto',
+    email: 'alberto@wizeline.com',
     phone: '12345678',
     origin: {
       is_office: true,
@@ -32,8 +32,8 @@ const defaultTrips = [
     }
   },
   {
-    name: 'Liusha',
-    email: 'liusha@wizeline.com',
+    name: 'Diego',
+    email: 'diego@wizeline.com',
     phone: '12345678',
     origin: {
       is_office: true,
