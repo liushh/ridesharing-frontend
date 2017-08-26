@@ -18,17 +18,14 @@ describe('Test create-trip-reducer', () => {
 
   it('should return an empty dictionary for driver trip', () => {
     const expectedState = {
-      isDriver: true,
-      name: '',
-      email: '',
-      phone: '',
+      driveOrRide: 'Drive',
       origin: {
-        is_office: true,
+        isOffice: true,
         zipcode: '',
         colonia: ''
       },
       destination: {
-        is_office: false,
+        isOffice: false,
         zipcode: '',
         colonia: ''
       }
@@ -36,7 +33,7 @@ describe('Test create-trip-reducer', () => {
 
     const action = {
       type: CREATE_TRIP,
-      isDriver: true
+      driveOrRide: 'Drive'
     };
 
     expect(reducer([], action)).toEqual(expectedState);
@@ -44,17 +41,14 @@ describe('Test create-trip-reducer', () => {
 
   it('should return an empty dictionary for rider trip', () => {
     const expectedState = {
-      isDriver: false,
-      name: '',
-      email: '',
-      phone: '',
+      driveOrRide: 'Ride',
       origin: {
-        is_office: true,
+        isOffice: true,
         zipcode: '',
         colonia: ''
       },
       destination: {
-        is_office: false,
+        isOffice: false,
         zipcode: '',
         colonia: ''
       }
@@ -62,7 +56,7 @@ describe('Test create-trip-reducer', () => {
 
     const action = {
       type: CREATE_TRIP,
-      isDriver: false
+      driveOrRide: 'Ride'
     };
 
     expect(reducer([], action)).toEqual(expectedState);
@@ -79,17 +73,14 @@ describe('Test create-trip-reducer', () => {
 
   it('should return currentTrip as null', () => {
     const currentTrip = {
-      isDriver: false,
-      name: '',
-      email: '',
-      phone: '',
+      driveOrRide: 'Ride',
       origin: {
-        is_office: true,
+        isOffice: true,
         zipcode: '',
         colonia: ''
       },
       destination: {
-        is_office: false,
+        isOffice: false,
         zipcode: '',
         colonia: ''
       }

@@ -6,7 +6,7 @@ describe('Test create trip action', () => {
 
     const expectedAction = {
       type: CREATE_TRIP,
-      isDriver: true
+      driveOrRide: 'Drive'
     };
     expect(action).toEqual(expectedAction);
   });
@@ -17,7 +17,7 @@ describe('Test create trip action', () => {
 
     const expectedAction = {
       type: CREATE_TRIP,
-      isDriver: false
+      driveOrRide: 'Ride'
     };
     expect(action).toEqual(expectedAction);
   });
