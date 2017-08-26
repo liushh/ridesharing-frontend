@@ -128,7 +128,6 @@ class EditTrip extends Component {
 
 EditTrip.propTypes = {
   currentUser: PropTypes.object,
-  currentTrip: PropTypes.object,
   saveCurrentTrip: PropTypes.func,
   cancelCurrentTrip: PropTypes.func
 };

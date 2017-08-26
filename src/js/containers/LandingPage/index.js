@@ -72,7 +72,6 @@ LandingPage.propTypes = {
 };
 
 const mapStateToProps = state => {
-  console.log('container currentTrip = ', state.currentTrip);
   return {
     trips: state.trips,
     currentUser: state.currentUser,
