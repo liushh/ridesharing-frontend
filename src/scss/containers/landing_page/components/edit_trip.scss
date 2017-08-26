@@ -5,11 +5,16 @@
 
 .edit-trip-row {
   display: flex;
-  height: 50px;
+  height: 40px;
 
-  .cell {
+  .cell-top {
     flex: 1;
-    margin: 10px;
+    margin: 10px 10px 0 10px;
+  }
+
+  .cell-bottom {
+    flex: 1;
+    margin: 0 10px 10px 10px;
   }
 }
 

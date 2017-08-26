@@ -30,13 +30,10 @@ class TripsTable extends Component {
   }
 
   _formatLocation(location, currentRowData) {
-    let formatedLocation = '';
-    if (currentRowData[location].is_office) {
-      formatedLocation = 'Office';
-    } else {
-      formatedLocation = currentRowData[location].colonia.concat('(', currentRowData[location].zipcode, ')');
+    if (currentRowData.isOffice) {
+      return 'Office';
     }
-    return formatedLocation;
+    return currentRowData[location].colonia.concat(' - ', currentRowData[location].zipcode);
   }
 
   _getFilterSection() {

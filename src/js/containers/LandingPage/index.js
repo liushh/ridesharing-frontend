@@ -44,6 +44,7 @@ const LandingPage = props => (
     {(props.currentTrip != null) ?
       <EditTrip
         currentTrip={props.currentTrip}
+        currentUser={props.currentUser}
         cancelCurrentTrip={props.cancelCurrentTrip}
         saveCurrentTrip={props.saveCurrentTrip} /> : null}
     <TripsTable
@@ -57,6 +58,7 @@ const LandingPage = props => (
 LandingPage.propTypes = {
   trips: PropTypes.array,
   currentTrip: PropTypes.object,
+  currentUser: PropTypes.object,
   tripFilter: PropTypes.string,
 
   createDriverTrip: PropTypes.func,
@@ -70,8 +72,10 @@ LandingPage.propTypes = {
 };
 
 const mapStateToProps = state => {
+  console.log('container currentTrip = ', state.currentTrip);
   return {
     trips: state.trips,
+    currentUser: state.currentUser,
     currentTrip: state.currentTrip,
     tripFilter: state.tripFilter
   };

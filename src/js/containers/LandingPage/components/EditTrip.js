@@ -6,14 +6,30 @@ class EditTrip extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.state = {
-      destinationZipCode: this.props.currentTrip.destination.zipcode,
-      originZipCode: this.props.currentTrip.origin.zipcode,
-      isDriver: this.props.currentTrip.isDriver,
-      name: this.props.currentTrip.name,
-      email: this.props.currentTrip.email
-    };
+    this.state = this._getState(this.props);
   }
+
+  componentWillReceiveProps(newProps) {
+    const stateObject = this._getState(newProps);
+    this.setState(stateObject);
+  }
+
+  _getState(props) {
+    const isToOffice = props.currentTrip.destination.isOffice;
+    const isFromOffice = props.currentTrip.origin.isOffice;
+    const stateObject = {
+      destinationZipCode: isToOffice ? 'Office' : props.currentTrip.destination.zipcode,
+      destinationColonia: isToOffice ? 'Office' : props.currentTrip.destination.colonia,
+
+      originColonia: isFromOffice ? 'Office' : props.currentTrip.origin.colonia,
+      originZipCode: isFromOffice ? 'Office' : props.currentTrip.origin.zipcode,
+
+      driveOrRide: props.currentTrip.driveOrRide
+    };
+
+    return stateObject;
+  }
+
 
   _updateInputValue(stateName, newValue) {
     const stateObject = {};
@@ -23,18 +39,19 @@ class EditTrip extends Component {
 
   _saveCurrentTrip() {
     const currentTrip = {
-      name: 'LiushaAdded',
-      email: 'liusha@wizeline.com',
-      phone: '12345678',
+      name: this.props.currentUser.name,
+      email: this.props.currentUser.email,
+      phone: this.props.currentUser.phone,
+      driveOrRide: this.state.driveOrRide,
       origin: {
-        is_office: true,
-        zipcode: '12345',
-        colonia: 'americana'
+        is_office: this.state.originColonia === 'Office',
+        zipcode: this.state.originZipCode,
+        colonia: this.state.originColonia
       },
       destination: {
-        is_office: false,
-        zipcode: '12345',
-        colonia: 'americana'
+        is_office: this.state.destinationColonia === 'Office',
+        zipcode: this.state.destinationZipCode,
+        colonia: this.state.destinationColonia
       }
     };
 
@@ -45,33 +62,53 @@ class EditTrip extends Component {
     return (
       <div className="edit-trip-container">
         <div className="edit-trip-row">
-          <div className="cell">Destination</div>
-          <div className="cell">Origin</div>
-          <div className="cell">Drive/Ride</div>
-          <div className="cell">Name</div>
-          <div className="cell">Email</div>
+          <div className="cell-top">Destination Zipcode</div>
+          <div className="cell-top">Destination Colonia</div>
+          <div className="cell-top">Origin Colonia</div>
+          <div className="cell-top">Origin Zipcode</div>
         </div>
         <div className="edit-trip-row">
           <input
             value={this.state.destinationZipCode}
-            className="cell"
+            className="cell-bottom"
             onChange={e => this._updateInputValue('destinationZipCode', e.target.value)} />
           <input
+            value={this.state.destinationColonia}
+            className="cell-bottom"
+            onChange={e => this._updateInputValue('destinationColonia', e.target.value)} />
+          <input
             value={this.state.originZipCode}
-            className="cell"
+            className="cell-bottom"
             onChange={e => this._updateInputValue('originZipCode', e.target.value)} />
           <input
-            value={this.state.isDriver}
-            className="cell"
-            onChange={e => this._updateInputValue('isDriver', e.target.value)} />
+            value={this.state.originColonia}
+            className="cell-bottom"
+            onChange={e => this._updateInputValue('originColonia', e.target.value)} />
+        </div>
+        <div className="edit-trip-row">
+          <div className="cell-top">Drive/Ride</div>
+          <div className="cell-top">Name</div>
+          <div className="cell-top">Email</div>
+          <div className="cell-top">Phone</div>
+        </div>
+
+        <div className="edit-trip-row">
           <input
-            value={this.state.name}
-            className="cell"
+            value={this.state.driveOrRide}
+            className="cell-bottom"
+            onChange={e => this._updateInputValue('DriveOrRide', e.target.value)} />
+          <input
+            value={this.props.currentUser.name}
+            className="cell-bottom"
             onChange={e => this._updateInputValue('name', e.target.value)} />
           <input
-            value={this.state.email}
-            className="cell"
+            value={this.props.currentUser.email}
+            className="cell-bottom"
             onChange={e => this._updateInputValue('email', e.target.value)} />
+          <input
+            value={this.props.currentUser.phone}
+            className="cell-bottom"
+            onChange={e => this._updateInputValue('phone', e.target.phone)} />
         </div>
 
         <div className="action-buttons">
@@ -90,6 +127,7 @@ class EditTrip extends Component {
 }
 
 EditTrip.propTypes = {
+  currentUser: PropTypes.object,
   currentTrip: PropTypes.object,
   saveCurrentTrip: PropTypes.func,
   cancelCurrentTrip: PropTypes.func
