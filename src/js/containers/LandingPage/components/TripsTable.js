@@ -12,7 +12,8 @@ class TripsTable extends Component {
       { key: 'email', name: 'Email' },
       { key: 'phone', name: 'Phone' },
       { key: 'origin', name: 'Origin' },
-      { key: 'destination', name: 'Destination' }
+      { key: 'destination', name: 'Destination' },
+      { key: 'actions', name: 'Actions' }
     ];
   }
 
@@ -23,10 +24,34 @@ class TripsTable extends Component {
       email: currentRowData.email,
       phone: currentRowData.phone,
       origin: this._formatLocation('origin', currentRowData),
-      destination: this._formatLocation('destination', currentRowData)
+      destination: this._formatLocation('destination', currentRowData),
+      actions: this._getActionButtons(currentRowData)
     };
 
     return currentRow;
+  }
+
+  _getActionButtons(currentRowData) {
+    return (
+      <div className="action-button-group">
+        <div className="action-button"
+             role="button"
+             onClick={this._editButtonClicked.bind(this, currentRowData)}>Edit</div>
+        <div className="action-button"
+             role="button"
+             onClick={this._deleteButtonClicked.bind(this, currentRowData)}>Delete</div>
+      </div>
+    );
+  }
+
+  _editButtonClicked(currentRowData) {
+    console.log('edit button clicked!!!!!!!!!!!!!!!!!!!! for ', currentRowData);
+    this.props.editTrip(currentRowData);
+  }
+
+  _deleteButtonClicked(currentRowData) {
+    console.log('delete button clicked!!!!!!!!!!!!!!!!!!!!');
+    this.props.deleteTrip(currentRowData);
   }
 
   _formatLocation(location, currentRowData) {
@@ -50,6 +75,7 @@ class TripsTable extends Component {
 
   render() {
     const filterSection = this._getFilterSection();
+    console.log('trips table trips = ', this.props.trips);
     return (
       <div>
         {filterSection}
@@ -67,7 +93,10 @@ TripsTable.propTypes = {
   trips: PropTypes.array,
   showAllTrips: PropTypes.func,
   showMyTrips: PropTypes.func,
-  showTripsClosedToMine: PropTypes.func
+  showTripsClosedToMine: PropTypes.func,
+
+  deleteTrip: PropTypes.func,
+  editTrip: PropTypes.func
 };
 
 export default TripsTable;
