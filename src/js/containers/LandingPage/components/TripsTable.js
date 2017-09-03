@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDataGrid from 'react-data-grid';
+import { SHOW_MY_TRIPS } from '../../../actions/show-my-trips';
 
 
 class TripsTable extends Component {
@@ -12,9 +13,22 @@ class TripsTable extends Component {
       { key: 'email', name: 'Email' },
       { key: 'phone', name: 'Phone' },
       { key: 'origin', name: 'Origin' },
-      { key: 'destination', name: 'Destination' },
-      { key: 'actions', name: 'Actions' }
+      { key: 'destination', name: 'Destination' }
     ];
+  }
+
+  componentWillReceiveProps(newProps) {
+    if (newProps.tripFilter === SHOW_MY_TRIPS) {
+      this.columns = [
+        { key: 'name', name: 'Name' },
+        { key: 'email', name: 'Email' },
+        { key: 'phone', name: 'Phone' },
+        { key: 'origin', name: 'Origin' },
+        { key: 'destination', name: 'Destination' },
+        { key: 'actions', name: 'Actions' }
+      ];
+      this.forceUpdate();
+    }
   }
 
   rowGetter(i) {
@@ -27,7 +41,6 @@ class TripsTable extends Component {
       destination: this._formatLocation('destination', currentRowData),
       actions: this._getActionButtons(currentRowData)
     };
-
     return currentRow;
   }
 
@@ -45,12 +58,10 @@ class TripsTable extends Component {
   }
 
   _editButtonClicked(currentRowData) {
-    console.log('edit button clicked!!!!!!!!!!!!!!!!!!!! for ', currentRowData);
     this.props.editTrip(currentRowData);
   }
 
   _deleteButtonClicked(currentRowData) {
-    console.log('delete button clicked!!!!!!!!!!!!!!!!!!!!');
     this.props.deleteTrip(currentRowData);
   }
 
@@ -75,7 +86,6 @@ class TripsTable extends Component {
 
   render() {
     const filterSection = this._getFilterSection();
-    console.log('trips table trips = ', this.props.trips);
     return (
       <div>
         {filterSection}
@@ -94,6 +104,7 @@ TripsTable.propTypes = {
   showAllTrips: PropTypes.func,
   showMyTrips: PropTypes.func,
   showTripsClosedToMine: PropTypes.func,
+  tripFilter: PropTypes.string,
 
   deleteTrip: PropTypes.func,
   editTrip: PropTypes.func

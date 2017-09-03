@@ -54,6 +54,7 @@ const LandingPage = props => (
       showAllTrips={props.showAllTrips}
       showMyTrips={props.showMyTrips}
       showTripsClosedToMine={props.showTripsClosedToMine}
+      tripFilter={props.tripFilter}
 
       deleteTrip={props.deleteTrip}
       editTrip={props.editTrip} />
