@@ -39,6 +39,7 @@ class EditTrip extends Component {
 
   _saveCurrentTrip() {
     const currentTrip = {
+      id: this.props.currentTrip.id,
       name: this.props.currentUser.name,
       email: this.props.currentUser.email,
       phone: this.props.currentUser.phone,

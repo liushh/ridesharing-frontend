@@ -1,6 +1,7 @@
 import { CREATE_TRIP } from '../actions/create-trip';
 import { CANCEL_CURRENT_TRIP } from '../actions/cancel-current-trip';
 import { SAVE_CURRENT_TRIP } from '../actions/save-current-trip';
+import { EDIT_TRIP } from '../actions/edit-trip';
 
 export default function CurrentTripReducer(state = null, action) {
   switch (action.type) {
@@ -19,6 +20,8 @@ export default function CurrentTripReducer(state = null, action) {
         }
       };
       return Object.assign({}, newTrip);
+    case EDIT_TRIP:
+      return Object.assign({}, action.trip);
     case CANCEL_CURRENT_TRIP:
     case SAVE_CURRENT_TRIP:
     default:

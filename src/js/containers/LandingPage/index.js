@@ -9,6 +9,8 @@ import { createDriverTrip,
          createRiderTrip } from '../../actions/create-trip';
 import { cancelCurrentTrip } from '../../actions/cancel-current-trip';
 import { saveCurrentTrip } from '../../actions/save-current-trip';
+import { deleteTrip } from '../../actions/delete-trip';
+import { editTrip } from '../../actions/edit-trip';
 
 
 import { SHOW_ALL_TRIPS, showAllTrips } from '../../actions/show-all-trips';
@@ -51,7 +53,10 @@ const LandingPage = props => (
       trips={_filterTrips(props.tripFilter, props.trips)}
       showAllTrips={props.showAllTrips}
       showMyTrips={props.showMyTrips}
-      showTripsClosedToMine={props.showTripsClosedToMine} />
+      showTripsClosedToMine={props.showTripsClosedToMine}
+
+      deleteTrip={props.deleteTrip}
+      editTrip={props.editTrip} />
   </div>
 );
 
@@ -65,6 +70,8 @@ LandingPage.propTypes = {
   createRiderTrip: PropTypes.func,
   saveCurrentTrip: PropTypes.func,
   cancelCurrentTrip: PropTypes.func,
+  deleteTrip: PropTypes.func,
+  editTrip: PropTypes.func,
 
   showAllTrips: PropTypes.func,
   showMyTrips: PropTypes.func,
@@ -85,6 +92,8 @@ const mapDispatchToComponent = dispatch => ({
   createRiderTrip: currentTrip => dispatch(createRiderTrip(currentTrip)),
   saveCurrentTrip: currentTrip => dispatch(saveCurrentTrip(currentTrip)),
   cancelCurrentTrip: () => dispatch(cancelCurrentTrip()),
+  deleteTrip: trip => dispatch(deleteTrip(trip)),
+  editTrip: trip => dispatch(editTrip(trip)),
 
   showAllTrips: () => dispatch(showAllTrips()),
   showTripsClosedToMine: () => dispatch(showTripsClosedToMine()),
