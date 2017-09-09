@@ -9,24 +9,26 @@ class TripsTable extends Component {
     super(props);
     this.props = props;
     this.columns = [
-      { key: 'name', name: 'Name' },
-      { key: 'email', name: 'Email' },
-      { key: 'phone', name: 'Phone' },
       { key: 'origin', name: 'Origin' },
       { key: 'destination', name: 'Destination' },
-      { key: 'time', name: 'Time' }
+      { key: 'time', name: 'Time' },
+      { key: 'driveOrRide', name: 'Drive/Ride' },
+      { key: 'name', name: 'Name' },
+      { key: 'email', name: 'Email' },
+      { key: 'phone', name: 'Phone' }
     ];
   }
 
   componentWillReceiveProps(newProps) {
     if (newProps.tripFilter === SHOW_MY_TRIPS) {
       this.columns = [
-        { key: 'name', name: 'Name' },
-        { key: 'email', name: 'Email' },
-        { key: 'phone', name: 'Phone' },
         { key: 'origin', name: 'Origin' },
         { key: 'destination', name: 'Destination' },
         { key: 'time', name: 'Time' },
+        { key: 'driveOrRide', name: 'Drive/Ride' },
+        { key: 'name', name: 'Name' },
+        { key: 'email', name: 'Email' },
+        { key: 'phone', name: 'Phone' },
         { key: 'actions', name: 'Actions' }
       ];
       this.forceUpdate();
@@ -36,12 +38,13 @@ class TripsTable extends Component {
   rowGetter(i) {
     const currentRowData = this.props.trips[i];
     const currentRow = {
-      name: currentRowData.name,
-      email: currentRowData.email,
-      phone: currentRowData.phone,
       origin: this._formatLocation('origin', currentRowData),
       destination: this._formatLocation('destination', currentRowData),
       time: this._formatTime(currentRowData),
+      driveOrRide: currentRowData.driveOrRide,
+      name: currentRowData.name,
+      email: currentRowData.email,
+      phone: currentRowData.phone,
       actions: this._getActionButtons(currentRowData)
     };
     return currentRow;
