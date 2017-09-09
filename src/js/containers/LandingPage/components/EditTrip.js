@@ -24,7 +24,11 @@ class EditTrip extends Component {
       originColonia: isFromOffice ? 'Office' : props.currentTrip.origin.colonia,
       originZipCode: isFromOffice ? 'Office' : props.currentTrip.origin.zipcode,
 
-      driveOrRide: props.currentTrip.driveOrRide
+      driveOrRide: props.currentTrip.driveOrRide,
+
+      hoursAndMinutes: props.currentTrip.hoursAndMinutes,
+      day: props.currentTrip.day,
+      month: props.currentTrip.month
     };
 
     return stateObject;
@@ -44,6 +48,9 @@ class EditTrip extends Component {
       email: this.props.currentUser.email,
       phone: this.props.currentUser.phone,
       driveOrRide: this.state.driveOrRide,
+      hoursAndMinutes: this.state.hoursAndMinutes,
+      day: this.state.day,
+      month: this.state.month,
       origin: {
         is_office: this.state.originColonia === 'Office',
         zipcode: this.state.originZipCode,
@@ -88,9 +95,9 @@ class EditTrip extends Component {
         </div>
         <div className="edit-trip-row">
           <div className="cell-top">Drive/Ride</div>
-          <div className="cell-top">Name</div>
-          <div className="cell-top">Email</div>
-          <div className="cell-top">Phone</div>
+          <div className="cell-top">Time</div>
+          <div className="cell-top">Day</div>
+          <div className="cell-top">Month</div>
         </div>
 
         <div className="edit-trip-row">
@@ -99,17 +106,17 @@ class EditTrip extends Component {
             className="cell-bottom"
             onChange={e => this._updateInputValue('DriveOrRide', e.target.value)} />
           <input
-            value={this.props.currentUser.name}
+            value={this.state.hoursAndMinutes}
             className="cell-bottom"
-            onChange={e => this._updateInputValue('name', e.target.value)} />
+            onChange={e => this._updateInputValue('hoursAndMinutes', e.target.value)} />
           <input
-            value={this.props.currentUser.email}
+            value={this.state.day}
             className="cell-bottom"
-            onChange={e => this._updateInputValue('email', e.target.value)} />
+            onChange={e => this._updateInputValue('day', e.target.value)} />
           <input
-            value={this.props.currentUser.phone}
+            value={this.state.month}
             className="cell-bottom"
-            onChange={e => this._updateInputValue('phone', e.target.phone)} />
+            onChange={e => this._updateInputValue('month', e.target.value)} />
         </div>
 
         <div className="action-buttons">
@@ -128,6 +135,7 @@ class EditTrip extends Component {
 }
 
 EditTrip.propTypes = {
+  currentTrip: PropTypes.object,
   currentUser: PropTypes.object,
   saveCurrentTrip: PropTypes.func,
   cancelCurrentTrip: PropTypes.func

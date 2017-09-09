@@ -23,7 +23,7 @@ const _getMyTrips = trips => {
 };
 
 const _getTripsClosedToMine = trips => {
-  return [];
+  return [trips];
 };
 
 const _filterTrips = (filter, trips) => {

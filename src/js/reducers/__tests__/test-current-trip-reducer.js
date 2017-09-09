@@ -3,6 +3,7 @@ import { CREATE_TRIP } from '../../actions/create-trip';
 import { CANCEL_CURRENT_TRIP } from '../../actions/cancel-current-trip';
 import { SAVE_CURRENT_TRIP } from '../../actions/save-current-trip';
 
+const moment = require('moment');
 
 describe('Test create-trip-reducer', () => {
   it('should return empty state', () => {
@@ -18,6 +19,9 @@ describe('Test create-trip-reducer', () => {
 
   it('should return an empty dictionary for driver trip', () => {
     const expectedState = {
+      hoursAndMinutes: moment().format('HH:mm'),
+      day: moment().format('DD'),
+      month: moment().format('MMM'),
       driveOrRide: 'Drive',
       origin: {
         isOffice: true,
@@ -41,6 +45,9 @@ describe('Test create-trip-reducer', () => {
 
   it('should return an empty dictionary for rider trip', () => {
     const expectedState = {
+      hoursAndMinutes: moment().format('HH:mm'),
+      day: moment().format('DD'),
+      month: moment().format('MMM'),
       driveOrRide: 'Ride',
       origin: {
         isOffice: true,

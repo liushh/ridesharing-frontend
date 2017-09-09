@@ -13,7 +13,8 @@ class TripsTable extends Component {
       { key: 'email', name: 'Email' },
       { key: 'phone', name: 'Phone' },
       { key: 'origin', name: 'Origin' },
-      { key: 'destination', name: 'Destination' }
+      { key: 'destination', name: 'Destination' },
+      { key: 'time', name: 'Time' }
     ];
   }
 
@@ -25,6 +26,7 @@ class TripsTable extends Component {
         { key: 'phone', name: 'Phone' },
         { key: 'origin', name: 'Origin' },
         { key: 'destination', name: 'Destination' },
+        { key: 'time', name: 'Time' },
         { key: 'actions', name: 'Actions' }
       ];
       this.forceUpdate();
@@ -39,6 +41,7 @@ class TripsTable extends Component {
       phone: currentRowData.phone,
       origin: this._formatLocation('origin', currentRowData),
       destination: this._formatLocation('destination', currentRowData),
+      time: this._formatTime(currentRowData),
       actions: this._getActionButtons(currentRowData)
     };
     return currentRow;
@@ -70,6 +73,10 @@ class TripsTable extends Component {
       return 'Office';
     }
     return currentRowData[location].colonia.concat(' - ', currentRowData[location].zipcode);
+  }
+
+  _formatTime(currentRowData) {
+    return currentRowData.month.concat(' ', currentRowData.day, ', ', currentRowData.hoursAndMinutes);
   }
 
   _getFilterSection() {
