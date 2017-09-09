@@ -3,36 +3,38 @@ import PropTypes from 'prop-types';
 import ReactDataGrid from 'react-data-grid';
 import { SHOW_MY_TRIPS } from '../../../actions/show-my-trips';
 
+const GENERAL_TRIP_COLUMNS = [
+  { key: 'origin', name: 'Origin' },
+  { key: 'destination', name: 'Destination' },
+  { key: 'time', name: 'Time' },
+  { key: 'driveOrRide', name: 'Drive/Ride' },
+  { key: 'name', name: 'Name' },
+  { key: 'email', name: 'Email' },
+  { key: 'phone', name: 'Phone' }
+];
+
+const MY_TRIP_COLUMNS = [
+  { key: 'origin', name: 'Origin' },
+  { key: 'destination', name: 'Destination' },
+  { key: 'time', name: 'Time' },
+  { key: 'driveOrRide', name: 'Drive/Ride' },
+  { key: 'name', name: 'Name' },
+  { key: 'email', name: 'Email' },
+  { key: 'phone', name: 'Phone' },
+  { key: 'actions', name: 'Actions' }
+];
+
 
 class TripsTable extends Component {
   constructor(props) {
     super(props);
     this.props = props;
-    this.columns = [
-      { key: 'origin', name: 'Origin' },
-      { key: 'destination', name: 'Destination' },
-      { key: 'time', name: 'Time' },
-      { key: 'driveOrRide', name: 'Drive/Ride' },
-      { key: 'name', name: 'Name' },
-      { key: 'email', name: 'Email' },
-      { key: 'phone', name: 'Phone' }
-    ];
+    this.state = { columns: GENERAL_TRIP_COLUMNS };
   }
 
   componentWillReceiveProps(newProps) {
-    if (newProps.tripFilter === SHOW_MY_TRIPS) {
-      this.columns = [
-        { key: 'origin', name: 'Origin' },
-        { key: 'destination', name: 'Destination' },
-        { key: 'time', name: 'Time' },
-        { key: 'driveOrRide', name: 'Drive/Ride' },
-        { key: 'name', name: 'Name' },
-        { key: 'email', name: 'Email' },
-        { key: 'phone', name: 'Phone' },
-        { key: 'actions', name: 'Actions' }
-      ];
-      this.forceUpdate();
-    }
+    const columns = newProps.tripFilter === SHOW_MY_TRIPS ? MY_TRIP_COLUMNS : GENERAL_TRIP_COLUMNS;
+    this.setState({ columns });
   }
 
   rowGetter(i) {
@@ -100,7 +102,7 @@ class TripsTable extends Component {
       <div>
         {filterSection}
         <ReactDataGrid
-          columns={this.columns}
+          columns={this.state.columns}
           rowGetter={this.rowGetter.bind(this)}
           rowsCount={this.props.trips.length}
           minHeight={500} />
