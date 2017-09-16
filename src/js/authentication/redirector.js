@@ -2,7 +2,7 @@ import { browserHistory } from 'react-router';
 
 export default class Redirector {
   onAuthenticationSucceed() {
-    browserHistory.push('/');
+    browserHistory.push('/trips');
   }
 
   // When users failed to login/signup we want to get them back to
