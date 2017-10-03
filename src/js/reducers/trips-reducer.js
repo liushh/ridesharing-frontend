@@ -1,10 +1,16 @@
-import { SAVE_CURRENT_TRIP } from '../actions/save-current-trip';
+import { SAVE_TRIP_SUCCESS } from '../actions/save-current-trip';
 import { DELETE_TRIP } from '../actions/delete-trip';
 import { FETCH_TRIPS_SUCCESS } from '../actions/fetch-trips';
 
-const _isSavingEditedTrip = trip => {
-  return !!trip.id;
+const _isSavingEditedTrip = (trips, savedTrip) => {
+  trips.forEach(trip => {
+    if (trip.id === savedTrip.id) {
+      return true;
+    }
+  });
+  return false;
 };
+
 
 const _replaceEditedTrip = (trips, editedTrip) => {
   const newTrips = trips.map(trip => {
@@ -16,8 +22,6 @@ const _replaceEditedTrip = (trips, editedTrip) => {
   return newTrips;
 };
 
-const moment = require('moment');
-
 const _deleteTrip = (trips, deletedTrip) => {
   const newTrips = trips.filter(trip => {
     if (trip.id === deletedTrip.id) {
@@ -28,41 +32,18 @@ const _deleteTrip = (trips, deletedTrip) => {
   return newTrips;
 };
 
-const originalTrips = [{
-  driveOrRide: 'Drive',
-  hoursAndMinutes: moment().format('HH:mm'),
-  day: moment().format('DD'),
-  month: moment().format('MMM'),
-  origin: {
-    isOffice: false,
-    zipcode: '44160 ',
-    colonia: 'Americana'
-  },
-  destination: {
-    isOffice: true,
-    zipcode: '45050',
-    colonia: 'Zapopan'
-  },
-  id: 123456,
-  name: 'Liusha Huang',
-  email: 'liusha@wizeline.com',
-  phone: '1234567890',
-}];
-
 
 export default function tripsReducer(trips = [], action) {
   switch (action.type) {
     case FETCH_TRIPS_SUCCESS:
       return action.trips;
-    case SAVE_CURRENT_TRIP:
-      const currentTrip = action.currentTrip;
-      if (_isSavingEditedTrip(currentTrip)) {
-        const newTrips = _replaceEditedTrip(trips, currentTrip);
+    case SAVE_TRIP_SUCCESS:
+      const savedTrip = action.trip;
+      if (_isSavingEditedTrip(trips, savedTrip)) {
+        const newTrips = _replaceEditedTrip(trips, savedTrip);
         return Object.assign([], newTrips);
       }
-
-      currentTrip.id = Math.floor((Math.random() * 10000) + 1);
-      trips.push(currentTrip);
+      trips.push(savedTrip);
       return Object.assign([], trips);
     case DELETE_TRIP:
       const newTrips = _deleteTrip(trips, action.trip);

@@ -12,16 +12,16 @@ export default function CurrentTripReducer(state = null, action) {
         driveOrRide: action.driveOrRide,
         hoursAndMinutes: moment().format('HH:mm'),
         day: moment().format('DD'),
-        month: moment().format('MMM'),
+        month: moment().format('MM'),
         origin: {
-          isOffice: true,
-          zipcode: '',
-          colonia: ''
+          isOffice: false,
+          zipcode: '94104',
+          colonyOrDistrict: 'Financial District'
         },
         destination: {
           isOffice: false,
-          zipcode: '',
-          colonia: ''
+          zipcode: '94107',
+          colonyOrDistrict: 'SOMA'
         }
       };
       return Object.assign({}, newTrip);

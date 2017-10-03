@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+const moment = require('moment');
 
 class EditTrip extends Component {
   constructor(props) {
@@ -19,9 +20,9 @@ class EditTrip extends Component {
     const isFromOffice = props.currentTrip.origin.isOffice;
     const stateObject = {
       destinationZipCode: isToOffice ? 'Office' : props.currentTrip.destination.zipcode,
-      destinationColonia: isToOffice ? 'Office' : props.currentTrip.destination.colonia,
+      destinationColonia: isToOffice ? 'Office' : props.currentTrip.destination.colonyOrDistrict,
 
-      originColonia: isFromOffice ? 'Office' : props.currentTrip.origin.colonia,
+      originColonia: isFromOffice ? 'Office' : props.currentTrip.origin.colonyOrDistrict,
       originZipCode: isFromOffice ? 'Office' : props.currentTrip.origin.zipcode,
 
       driveOrRide: props.currentTrip.driveOrRide,
@@ -48,21 +49,19 @@ class EditTrip extends Component {
       email: this.props.currentUser.email,
       phone: this.props.currentUser.phone,
       driveOrRide: this.state.driveOrRide,
-      hoursAndMinutes: this.state.hoursAndMinutes,
-      day: this.state.day,
-      month: this.state.month,
+      time: '2017-'.concat(this.state.month, '-', this.state.day, ' ', this.state.hoursAndMinutes, ':00 UTC'),
       origin: {
         is_office: this.state.originColonia === 'Office',
         zipcode: this.state.originZipCode,
-        colonia: this.state.originColonia
+        colonyOrDistrict: this.state.originColonia
       },
       destination: {
         is_office: this.state.destinationColonia === 'Office',
         zipcode: this.state.destinationZipCode,
-        colonia: this.state.destinationColonia
+        colonyOrDistrict: this.state.destinationColonia
       }
     };
-
+    console.log('current trip = ', currentTrip);
     this.props.saveCurrentTrip(currentTrip);
   }
 
