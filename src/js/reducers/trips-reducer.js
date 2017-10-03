@@ -1,5 +1,6 @@
 import { SAVE_CURRENT_TRIP } from '../actions/save-current-trip';
 import { DELETE_TRIP } from '../actions/delete-trip';
+import { FETCH_TRIPS_SUCCESS } from '../actions/fetch-trips';
 
 const _isSavingEditedTrip = trip => {
   return !!trip.id;
@@ -49,10 +50,10 @@ const originalTrips = [{
 }];
 
 
-export default function tripsReducer(trips = originalTrips, action) {
+export default function tripsReducer(trips = [], action) {
   switch (action.type) {
-    case 'TRIPS_LOADED':
-      return action.payload;
+    case FETCH_TRIPS_SUCCESS:
+      return action.trips;
     case SAVE_CURRENT_TRIP:
       const currentTrip = action.currentTrip;
       if (_isSavingEditedTrip(currentTrip)) {

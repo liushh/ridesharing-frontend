@@ -1,3 +1,5 @@
+const moment = require('moment');
+
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import ReactDataGrid from 'react-data-grid';
@@ -77,11 +79,12 @@ class TripsTable extends Component {
     if (currentRowData.isOffice) {
       return 'Office';
     }
-    return currentRowData[location].colonia.concat(' - ', currentRowData[location].zipcode);
+    return currentRowData[location].colonyOrDistrict.concat(' - ', currentRowData[location].zipcode);
   }
 
   _formatTime(currentRowData) {
-    return currentRowData.month.concat(' ', currentRowData.day, ', ', currentRowData.hoursAndMinutes);
+    const time = moment(currentRowData.time, 'YYYY-MM-DD HH:mm UTC');
+    return time.format('YYYY/M/D HH:mm');
   }
 
   _getFilterSection() {

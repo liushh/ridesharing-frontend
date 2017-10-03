@@ -12,7 +12,10 @@ import { REDIRECT_URL } from './authentication/constants';
 import App from './containers/App';
 import LandingPage from './containers/LandingPage';
 
+import { fetchTrips } from './actions/fetch-trips';
+
 import '../scss/main.scss';
+
 
 const store = createStore(
   allReducers,
@@ -27,11 +30,16 @@ const isCurrentPageRoot = () => browserHistory.getCurrentLocation().pathname ===
 
 const verifyAuthenticated = () => {
   if (!auth.isLoggedIn()) {
+    console.log('need to login');
     if (!isCurrentPageRoot()) browserHistory.push('/');
     auth.showLoginDialog();
+    console.log('show login window');
   }
+  console.log('no need to login');
   return true;
 };
+
+const fetchAllTrips = () => store.dispatch(fetchTrips());
 
 ReactDOM.render(
   <Provider store={store}>
@@ -39,7 +47,7 @@ ReactDOM.render(
       <div>
         <Route path="/auth0_authenticated" />
         <Route path="/" component={App} onEnter={verifyAuthenticated} >
-          <Route path="/trips" component={LandingPage} />
+          <Route path="/trips" component={LandingPage} onEnter={fetchAllTrips} />
         </Route>
       </div>
     </Router>
