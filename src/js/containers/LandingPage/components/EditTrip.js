@@ -49,7 +49,7 @@ class EditTrip extends Component {
       email: this.props.currentUser.email,
       phone: this.props.currentUser.phone,
       driveOrRide: this.state.driveOrRide,
-      time: '2017-'.concat(this.state.month, '-', this.state.day, ' ', this.state.hoursAndMinutes, ':00 UTC'),
+      time: this._formatTime(this.state.month, this.state.day, this.state.hoursAndMinutes),
       origin: {
         is_office: this.state.originColonia === 'Office',
         zipcode: this.state.originZipCode,
@@ -61,8 +61,12 @@ class EditTrip extends Component {
         colonyOrDistrict: this.state.destinationColonia
       }
     };
-    console.log('current trip = ', currentTrip);
     this.props.saveCurrentTrip(currentTrip);
+  }
+
+  _formatTime(month, day, hoursAndMinutes) {
+    const time = moment('2017-'.concat(month, '-', day, ' ', hoursAndMinutes), 'YYYY-M-DD HH:mm');
+    return time.utc().format('YYYY-M-DD HH:mm');
   }
 
   render() {
