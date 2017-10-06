@@ -10,9 +10,7 @@ export default function CurrentTripReducer(state = null, action) {
     case CREATE_TRIP:
       const newTrip = {
         driveOrRide: action.driveOrRide,
-        hoursAndMinutes: moment().format('HH:mm'),
-        day: moment().format('DD'),
-        month: moment().format('MM'),
+        time: moment().add(30, 'minutes'),
         origin: {
           isOffice: false,
           zipcode: '94104',

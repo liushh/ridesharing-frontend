@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
+import Datetime from 'react-datetime';
+
 const moment = require('moment');
 
 class EditTrip extends Component {
@@ -18,6 +20,9 @@ class EditTrip extends Component {
   _getState(props) {
     const isToOffice = props.currentTrip.destination.isOffice;
     const isFromOffice = props.currentTrip.origin.isOffice;
+    console.log('time   =  ', props.currentTrip.time);
+    const time = moment.utc(props.currentTrip.time, 'YYYY-MM-DD HH:mm');
+
     const stateObject = {
       destinationZipCode: isToOffice ? 'Office' : props.currentTrip.destination.zipcode,
       destinationColonia: isToOffice ? 'Office' : props.currentTrip.destination.colonyOrDistrict,
@@ -27,9 +32,9 @@ class EditTrip extends Component {
 
       driveOrRide: props.currentTrip.driveOrRide,
 
-      hoursAndMinutes: props.currentTrip.hoursAndMinutes,
-      day: props.currentTrip.day,
-      month: props.currentTrip.month
+      hoursAndMinutes: time.format('HH:mm'),
+      day: time.format('DD'),
+      month: time.format('MM')
     };
 
     return stateObject;
@@ -66,60 +71,78 @@ class EditTrip extends Component {
 
   _formatTime(month, day, hoursAndMinutes) {
     const time = moment('2017-'.concat(month, '-', day, ' ', hoursAndMinutes), 'YYYY-M-DD HH:mm');
-    return time.utc().format('YYYY-M-DD HH:mm');
+    return time.utc().format('YYYY-M-DDTHH:mm:00 Z');
   }
 
   render() {
     return (
       <div className="edit-trip-container">
         <div className="edit-trip-row">
-          <div className="cell-top">Destination Zipcode</div>
-          <div className="cell-top">Destination Colonia</div>
-          <div className="cell-top">Origin Colonia</div>
-          <div className="cell-top">Origin Zipcode</div>
-        </div>
-        <div className="edit-trip-row">
+          <label>
+          Destination
           <input
+            placeholder="destination zipcode"
             value={this.state.destinationZipCode}
             className="cell-bottom"
             onChange={e => this._updateInputValue('destinationZipCode', e.target.value)} />
           <input
+            placeholder="destination colony"
             value={this.state.destinationColonia}
             className="cell-bottom"
             onChange={e => this._updateInputValue('destinationColonia', e.target.value)} />
           <input
+              type="radio"
+              name="is_office"
+              value={this.state.driveOrRide}
+              className="cell-bottom"
+              onChange={e => this._updateInputValue('DriveOrRide', e.target.value)} />
+          to the office
+          </label>
+        </div>
+        <div className="edit-trip-row">
+          <label>
+          Origin
+          <input
+            placeholder="origin zipcode"
             value={this.state.originZipCode}
             className="cell-bottom"
             onChange={e => this._updateInputValue('originZipCode', e.target.value)} />
           <input
+            placeholder="origin colony"
             value={this.state.originColonia}
             className="cell-bottom"
             onChange={e => this._updateInputValue('originColonia', e.target.value)} />
-        </div>
-        <div className="edit-trip-row">
-          <div className="cell-top">Drive/Ride</div>
-          <div className="cell-top">Time</div>
-          <div className="cell-top">Day</div>
-          <div className="cell-top">Month</div>
+          <input
+              type="radio"
+              name="is_office"
+              value={this.state.driveOrRide}
+              className="cell-bottom"
+              onChange={e => this._updateInputValue('DriveOrRide', e.target.value)} />
+          from the office
+          </label>
         </div>
 
         <div className="edit-trip-row">
-          <input
-            value={this.state.driveOrRide}
-            className="cell-bottom"
-            onChange={e => this._updateInputValue('DriveOrRide', e.target.value)} />
-          <input
-            value={this.state.hoursAndMinutes}
-            className="cell-bottom"
-            onChange={e => this._updateInputValue('hoursAndMinutes', e.target.value)} />
-          <input
-            value={this.state.day}
-            className="cell-bottom"
-            onChange={e => this._updateInputValue('day', e.target.value)} />
-          <input
-            value={this.state.month}
-            className="cell-bottom"
-            onChange={e => this._updateInputValue('month', e.target.value)} />
+          <Datetime
+            defaultValue={moment()} />
+          <label>
+            <input
+              type="radio"
+              name="driveOrRide"
+              value={this.state.driveOrRide}
+              className="cell-bottom"
+              onChange={e => this._updateInputValue('DriveOrRide', e.target.value)} />
+            Drive
+          </label>
+          <label>
+            <input
+              type="radio"
+              name="driveOrRide"
+              value={this.state.driveOrRide}
+              className="cell-bottom"
+              onChange={e => this._updateInputValue('DriveOrRide', e.target.value)} />
+            Ride
+          </label>
         </div>
 
         <div className="action-buttons">

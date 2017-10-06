@@ -43,7 +43,7 @@ export default function tripsReducer(trips = [], action) {
         const newTrips = _replaceEditedTrip(trips, savedTrip);
         return Object.assign([], newTrips);
       }
-      trips.push(savedTrip);
+      trips.unshift(savedTrip);
       return Object.assign([], trips);
     case DELETE_TRIP:
       const newTrips = _deleteTrip(trips, action.trip);

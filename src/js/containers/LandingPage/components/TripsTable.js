@@ -48,7 +48,7 @@ class TripsTable extends Component {
       driveOrRide: currentRowData.driveOrRide,
       name: currentRowData.name,
       email: currentRowData.email,
-      phone: currentRowData.phone,
+      phone: currentRowData.phone || '-',
       actions: this._getActionButtons(currentRowData)
     };
     return currentRow;
@@ -83,8 +83,8 @@ class TripsTable extends Component {
   }
 
   _formatTime(currentRowData) {
-    const time = moment(currentRowData.time, 'YYYY-MM-DD HH:mm UTC');
-    return time.format('YYYY/M/D HH:mm');
+    const time = moment.utc(currentRowData.time, 'YYYY-MM-DD HH:mm');
+    return time.local().format('YYYY/M/D HH:mm');
   }
 
   _getFilterSection() {
@@ -94,7 +94,7 @@ class TripsTable extends Component {
         <div className="filter"
              role="button"
              onClick={this.props.showTripsClosedToMine}>Close to mine</div>
-        <div className="filter" role="button" onClick={this.props.showMyTrips}>My trips</div>
+        <div className="filter" role="action-buttonon" onClick={this.props.showMyTrips}>My trips</div>
       </div>
     );
   }

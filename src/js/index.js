@@ -22,8 +22,8 @@ const store = createStore(
   applyMiddleware(thunk)
 );
 
-const clientId = '84vHiRQ-jsS6ihrAcJoBnRXVJcLBu6nm';
-const domain = 'liusha.auth0.com';
+const clientId = 'f4to0gzhJ4eWYx7MaquQdPFxu873B5Pc';
+const domain = 'liushh.auth0.com';
 const auth = new Authentication(clientId, domain, REDIRECT_URL, localStorage);
 
 const isCurrentPageRoot = () => browserHistory.getCurrentLocation().pathname === '/';
