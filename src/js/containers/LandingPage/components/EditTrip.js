@@ -23,21 +23,18 @@ class EditTrip extends Component {
   }
 
   _getState(props) {
-    const isToOffice = props.currentTrip.destination.isOffice;
-    const isFromOffice = props.currentTrip.origin.isOffice;
-
     const stateObject = {
-      destinationZipCode: props.currentTrip.destination.zipcode,
-      destinationColony: props.currentTrip.destination.colonyOrDistrict,
+      destinationZipcode: localStorage.getItem('destinationZipcode') || props.currentTrip.destination.zipcode,
+      destinationColonyOrDistrict: localStorage.getItem('destinationColonyOrDistrict') || props.currentTrip.destination.colonyOrDistrict,
 
-      originColony: props.currentTrip.origin.colonyOrDistrict,
-      originZipCode: props.currentTrip.origin.zipcode,
+      originColonyOrDistrict: localStorage.getItem('originColonyOrDistrict') || props.currentTrip.origin.colonyOrDistrict,
+      originZipcode: localStorage.getItem('originZipcode') || props.currentTrip.origin.zipcode,
 
       driveOrRide: props.currentTrip.driveOrRide,
 
       time: props.currentTrip.time,
-      isToOffice,
-      isFromOffice
+      isFromOffice: localStorage.getItem('isFromOffice'),
+      isToOffice: localStorage.getItem('isToOffice')
     };
 
     return stateObject;
@@ -45,22 +42,17 @@ class EditTrip extends Component {
 
 
   _updateInputValue(stateName, newValue) {
-    console.log('stateName = ', stateName);
-    console.log('newValue = ', newValue);
-
     const stateObject = {};
     stateObject[stateName] = newValue;
     if (stateName === 'isToOffice') {
-      stateObject['destinationZipCode'] = officeZipcode;
-      stateObject['destinationColony'] = officeColony;
-      stateObject['isFromOffice'] = false;
+      stateObject.destinationZipcode = officeZipcode;
+      stateObject.destinationColonyOrDistrict = officeColony;
+      stateObject.isFromOffice = false;
     } else if (stateName === 'isFromOffice') {
-      stateObject['originZipCode'] = officeZipcode;
-      stateObject['originColony'] = officeColony;
-      stateObject['isToOffice'] = false;
+      stateObject.originZipcode = officeZipcode;
+      stateObject.originColonyOrDistrict = officeColony;
+      stateObject.isToOffice = false;
     }
-
-    console.log('stateObject = ', stateObject);
     this.setState(stateObject);
   }
 
@@ -74,21 +66,29 @@ class EditTrip extends Component {
       time: this.state.time.utc().format('YYYY-M-DDTHH:mm:00 Z'),
       origin: {
         isOffice: this.state.isFromOffice,
-        zipcode: this.state.originZipCode,
-        colonyOrDistrict: this.state.originColony
+        zipcode: this.state.originZipcode,
+        colonyOrDistrict: this.state.originColonyOrDistrict
       },
       destination: {
         isOffice: this.state.isToOffice,
-        zipcode: this.state.destinationZipCode,
-        colonyOrDistrict: this.state.destinationColony
+        zipcode: this.state.destinationZipcode,
+        colonyOrDistrict: this.state.destinationColonyOrDistrict
       }
     };
-    console.log('currentTrip = ', currentTrip);
+    this._saveLocationsInLocal();
     this.props.saveCurrentTrip(currentTrip);
   }
 
+  _saveLocationsInLocal() {
+    localStorage.setItem('isFromOffice', this.state.isFromOffice);
+    localStorage.setItem('originZipcode', this.state.originZipcode);
+    localStorage.setItem('originColonyOrDistrict', this.state.originColonyOrDistrict);
+    localStorage.setItem('isToOffice', this.state.isToOffice);
+    localStorage.setItem('destinationZipcode', this.state.destinationZipcode);
+    localStorage.setItem('destinationColonyOrDistrict', this.state.destinationColonyOrDistrict);
+  }
+
   render() {
-    console.log('this.state = ', this.state);
     return (
       <div className="edit-trip-container">
         <div className="edit-trip-row">
@@ -96,14 +96,14 @@ class EditTrip extends Component {
           Destination
           <input
             placeholder="destination zipcode"
-            value={this.state.destinationZipCode}
+            value={this.state.destinationZipcode}
             className="cell-bottom"
-            onChange={e => this._updateInputValue('destinationZipCode', e.target.value)} />
+            onChange={e => this._updateInputValue('destinationZipcode', e.target.value)} />
           <input
             placeholder="destination colony"
-            value={this.state.destinationColony}
+            value={this.state.destinationColonyOrDistrict}
             className="cell-bottom"
-            onChange={e => this._updateInputValue('destinationColony', e.target.value)} />
+            onChange={e => this._updateInputValue('destinationColonyOrDistrict', e.target.value)} />
           <input
               type="radio"
               name="isOffice"
@@ -118,14 +118,14 @@ class EditTrip extends Component {
           Origin
           <input
             placeholder="origin zipcode"
-            value={this.state.originZipCode}
+            value={this.state.originZipcode}
             className="cell-bottom"
-            onChange={e => this._updateInputValue('originZipCode', e.target.value)} />
+            onChange={e => this._updateInputValue('originZipcode', e.target.value)} />
           <input
             placeholder="origin colony"
-            value={this.state.originColony}
+            value={this.state.originColonyOrDistrict}
             className="cell-bottom"
-            onChange={e => this._updateInputValue('originColony', e.target.value)} />
+            onChange={e => this._updateInputValue('originColonyOrDistrict', e.target.value)} />
           <input
               type="radio"
               name="isOffice"
