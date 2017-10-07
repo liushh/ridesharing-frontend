@@ -83,8 +83,10 @@ class TripsTable extends Component {
   }
 
   _formatTime(currentRowData) {
+    console.log('currentRowData.time = ', currentRowData.time);
     const time = moment.utc(currentRowData.time, 'YYYY-MM-DD HH:mm');
-    return time.local().format('YYYY/M/D HH:mm');
+    console.log('time = ', time);
+    return time.format('YYYY/M/D HH:mm');
   }
 
   _getFilterSection() {

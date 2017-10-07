@@ -12,9 +12,9 @@ export default function CurrentTripReducer(state = null, action) {
         driveOrRide: action.driveOrRide,
         time: moment().add(30, 'minutes'),
         origin: {
-          isOffice: false,
-          zipcode: '94104',
-          colonyOrDistrict: 'Financial District'
+          isOffice: true,
+          zipcode: '45050',
+          colonyOrDistrict: 'Jardines del Sol'
         },
         destination: {
           isOffice: false,
