@@ -41,6 +41,11 @@ class TripsTable extends Component {
 
   rowGetter(i) {
     const currentRowData = this.props.trips[i];
+    currentRowData.time = moment.utc(currentRowData.time, 'YYYY-MM-DD HH:mm').local();
+    if (currentRowData.id === 90) {
+      console.log('currentRowData.time = ', currentRowData.time);
+      console.log('currentRowData.time.format(YYYY/M/D HH:mm);', currentRowData.time.format('YYYY/M/D HH:mm'));
+    }
     const currentRow = {
       origin: this._formatLocation('origin', currentRowData),
       destination: this._formatLocation('destination', currentRowData),
@@ -83,8 +88,7 @@ class TripsTable extends Component {
   }
 
   _formatTime(currentRowData) {
-    const time = moment.utc(currentRowData.time, 'YYYY-MM-DD HH:mm');
-    return time.format('YYYY/M/D HH:mm');
+    return currentRowData.time.format('YYYY/M/D HH:mm');
   }
 
   _getFilterSection() {

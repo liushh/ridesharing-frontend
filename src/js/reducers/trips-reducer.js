@@ -1,13 +1,14 @@
 import { SAVE_TRIP_SUCCESS } from '../actions/save-current-trip';
-import { DELETE_TRIP } from '../actions/delete-trip';
+import { DELETE_TRIP_SUCCESS } from '../actions/delete-trip';
 import { FETCH_TRIPS_SUCCESS } from '../actions/fetch-trips';
 
 const _isSavingEditedTrip = (trips, savedTrip) => {
-  trips.forEach(trip => {
+  for (let i = 0; i < trips.length; i++) {
+    const trip = trips[i];
     if (trip.id === savedTrip.id) {
       return true;
     }
-  });
+  }
   return false;
 };
 
@@ -45,7 +46,7 @@ export default function tripsReducer(trips = [], action) {
       }
       trips.unshift(savedTrip);
       return Object.assign([], trips);
-    case DELETE_TRIP:
+    case DELETE_TRIP_SUCCESS:
       const newTrips = _deleteTrip(trips, action.trip);
       return Object.assign([], newTrips);
     default:

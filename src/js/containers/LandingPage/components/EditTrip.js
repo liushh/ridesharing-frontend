@@ -23,23 +23,23 @@ class EditTrip extends Component {
   }
 
   _getState(props) {
+    console.log('props.currentTrip = ', props.currentTrip);
     const stateObject = {
-      destinationZipcode: localStorage.getItem('destinationZipcode') || props.currentTrip.destination.zipcode,
-      destinationColonyOrDistrict: localStorage.getItem('destinationColonyOrDistrict') || props.currentTrip.destination.colonyOrDistrict,
+      destinationZipcode: props.currentTrip.destination.zipcode,
+      destinationColonyOrDistrict: props.currentTrip.destination.colonyOrDistrict,
 
-      originColonyOrDistrict: localStorage.getItem('originColonyOrDistrict') || props.currentTrip.origin.colonyOrDistrict,
-      originZipcode: localStorage.getItem('originZipcode') || props.currentTrip.origin.zipcode,
+      originColonyOrDistrict: props.currentTrip.origin.colonyOrDistrict,
+      originZipcode: props.currentTrip.origin.zipcode,
 
       driveOrRide: props.currentTrip.driveOrRide,
 
       time: props.currentTrip.time,
-      isFromOffice: localStorage.getItem('isFromOffice'),
-      isToOffice: localStorage.getItem('isToOffice')
+      isFromOffice: props.currentTrip.origin.isOffice,
+      isToOffice: props.currentTrip.destination.isOffice
     };
 
     return stateObject;
   }
-
 
   _updateInputValue(stateName, newValue) {
     const stateObject = {};
@@ -138,7 +138,7 @@ class EditTrip extends Component {
 
         <div className="edit-trip-row">
           <Datetime
-            defaultValue={moment()}
+            defaultValue={this.state.time}
             onChange={date => this._updateInputValue('time', date)} />
           <label>
             <input

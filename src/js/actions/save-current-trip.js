@@ -15,6 +15,12 @@ const saveCurrentTrip = currentTrip => {
   console.log('saveCurrentTrip currentTrip = ', currentTrip);
   return dispatch => {
     const tripAPI = new TripAPI();
+    if (currentTrip.id) {
+      return tripAPI.updateTrip(currentTrip)
+                    .then(trip => {
+                      dispatch(saveTripSuccess(trip));
+                    });
+    }
     return tripAPI.saveTrip(currentTrip)
                   .then(trip => {
                     dispatch(saveTripSuccess(trip));
