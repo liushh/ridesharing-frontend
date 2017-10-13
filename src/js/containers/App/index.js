@@ -2,7 +2,7 @@ import React from 'react';
 
 const App = ({ children }) => (
   <div>
-    <h1>WizePool</h1>
+    <h1 className='center-text'>WizePool</h1>
     {children}
   </div>
 );

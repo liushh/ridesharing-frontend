@@ -1,0 +1,41 @@
+@import 'colors';
+
+.border-top-grey {
+  border-top: 2px solid $pale-grey;
+}
+
+.border-top-grey-thin {
+  border-top: 1px solid $pale-grey;
+}
+
+.border-bottom-grey-thin {
+  border-bottom: 1px solid $pale-grey;
+}
+
+.border-right-grey-thin {
+  border-right: 1px solid $pale-grey;
+}
+
+.border-left-grey-thin {
+  border-left: 1px solid $pale-grey;
+}
+
+.border-full-grey {
+  border: 2px solid $pale-grey;
+}
+
+.border-full-grey-thin {
+  border: 1px solid $pale-grey;
+}
+
+.border-top-blue {
+  border-top: 2px solid $dark-sky-blue;
+}
+
+.border-theme-color {
+  border: 2px solid $theme-color;
+}
+
+.border-radius-3 {
+  border-radius: 3px;
+}

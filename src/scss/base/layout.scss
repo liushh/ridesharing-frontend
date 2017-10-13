@@ -1,3 +1,83 @@
 .inline-block {
   display: inline-block;
 }
+
+.align-center {
+  align-items: center;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  @extend .flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.space-between {
+  @extend .flex;
+  justify-content: space-between;
+}
+
+.float-right {
+  float: right;
+}
+
+.float-left {
+  float: left;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.grid-container {
+  @extend .full-width;
+  box-sizing: border-box;
+}
+
+[class*='col-'] {
+  @extend .float-left;
+  min-height: 1px;
+  width: 6.25%;
+}
+
+.col-1  { width: 6.25%; }
+.col-2  { width: 12.5%; }
+.col-3  { width: 18.75%;}
+.col-4  { width: 25%;   }
+.col-5  { width: 31.25%;}
+.col-6  { width: 37.5%; }
+.col-7  { width: 43.75%;}
+.col-8  { width: 50%;   }
+.col-9  { width: 56.25%;}
+.col-10 { width: 62.5%; }
+.col-11 { width: 68.75%;}
+.col-12 { width: 75%;   }
+.col-13 { width: 81.25%;}
+.col-14 { width: 87.5%; }
+.col-15 { width: 93.75%;}
+.col-16 { width: 100%;  }
+
+.col-offset-1  { margin-left: 6.25%; }
+.col-offset-2  { margin-left: 12.5%; }
+.col-offset-3  { margin-left: 18.75%;}
+.col-offset-4  { margin-left: 25%;   }
+.col-offset-5  { margin-left: 31.25%;}
+.col-offset-6  { margin-left: 37.5%; }
+.col-offset-7  { margin-left: 43.75%;}
+.col-offset-8  { margin-left: 50%;   }
+.col-offset-9  { margin-left: 56.25%;}
+.col-offset-10 { margin-left: 62.5%; }
+.col-offset-11 { margin-left: 68.75%;}
+.col-offset-12 { margin-left: 75%;   }
+.col-offset-13 { margin-left: 81.25%;}
+.col-offset-14 { margin-left: 87.5%; }
+.col-offset-15 { margin-left: 93.75%;}
+.col-offset-16 { margin-left: 100%;  }

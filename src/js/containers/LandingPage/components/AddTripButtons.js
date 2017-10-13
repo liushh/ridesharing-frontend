@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 
 const AddTripButtons = ({ createDriverTrip, createRiderTrip }) => (
   <div className="buttons-container">
-    <div className="button" role="button" onClick={createDriverTrip}>I can drive</div>
-    <div className="button" role="button" onClick={createRiderTrip}>Need a ride or Uber</div>
+    <div className="button" role="button" onClick={createDriverTrip}>I CAN DRIVE</div>
+    <div className="button" role="button" onClick={createRiderTrip}>I NEED A RIDE/UBER</div>
   </div>
 );
 

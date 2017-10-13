@@ -95,10 +95,7 @@ class TripsTable extends Component {
     return (
       <div className="filters-container">
         <div className="filter" role="button" onClick={this.props.showAllTrips}>All trips</div>
-        <div className="filter"
-             role="button"
-             onClick={this.props.showTripsClosedToMine}>Close to mine</div>
-        <div className="filter" role="action-buttonon" onClick={this.props.showMyTrips}>My trips</div>
+        <div className="filter" role="button" onClick={this.props.showMyTrips}>My trips</div>
       </div>
     );
   }

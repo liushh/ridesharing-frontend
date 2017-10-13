@@ -23,7 +23,6 @@ class EditTrip extends Component {
   }
 
   _getState(props) {
-    console.log('props.currentTrip = ', props.currentTrip);
     const stateObject = {
       destinationZipcode: props.currentTrip.destination.zipcode,
       destinationColonyOrDistrict: props.currentTrip.destination.colonyOrDistrict,
@@ -92,83 +91,105 @@ class EditTrip extends Component {
     return (
       <div className="edit-trip-container">
         <div className="edit-trip-row">
-          <label>
-          Destination
+          <div className='row-title'>
+            Destination
+          </div>
           <input
-            placeholder="destination zipcode"
+            placeholder="Zipcode"
             value={this.state.destinationZipcode}
-            className="cell-bottom"
+            className="cell"
             onChange={e => this._updateInputValue('destinationZipcode', e.target.value)} />
           <input
-            placeholder="destination colony"
+            placeholder="Neighborhood*"
             value={this.state.destinationColonyOrDistrict}
-            className="cell-bottom"
+            className="cell"
             onChange={e => this._updateInputValue('destinationColonyOrDistrict', e.target.value)} />
-          <input
-              type="radio"
-              name="isOffice"
-              className="cell-bottom"
-              checked={this.state.isToOffice}
-              onChange={e => this._updateInputValue('isToOffice', true)} />
-          to the office
-          </label>
-        </div>
-        <div className="edit-trip-row">
-          <label>
-          Origin
-          <input
-            placeholder="origin zipcode"
-            value={this.state.originZipcode}
-            className="cell-bottom"
-            onChange={e => this._updateInputValue('originZipcode', e.target.value)} />
-          <input
-            placeholder="origin colony"
-            value={this.state.originColonyOrDistrict}
-            className="cell-bottom"
-            onChange={e => this._updateInputValue('originColonyOrDistrict', e.target.value)} />
-          <input
-              type="radio"
-              name="isOffice"
-              className="cell-bottom"
-              checked={this.state.isFromOffice}
-              onChange={e => this._updateInputValue('isFromOffice', true)} />
-          from the office
-          </label>
+          <div className="cell">
+            <input
+                type="radio"
+                name="isOffice"
+                className="margin-right-8"
+                checked={this.state.isToOffice}
+                onChange={e => this._updateInputValue('isToOffice', true)} />
+            to the office
+          </div>
         </div>
 
         <div className="edit-trip-row">
+          <div className='row-title'>
+            Origin
+          </div>  
+          <input
+            placeholder="Zipcode"
+            value={this.state.originZipcode}
+            className="cell"
+            onChange={e => this._updateInputValue('originZipcode', e.target.value)} />
+          <input
+            placeholder="Neighborhood*"
+            value={this.state.originColonyOrDistrict}
+            className="cell"
+            onChange={e => this._updateInputValue('originColonyOrDistrict', e.target.value)} />
+          <div className="cell">
+            <input
+                type="radio"
+                name="isOffice"
+                className="margin-right-8"
+                checked={this.state.isFromOffice}
+                onChange={e => this._updateInputValue('isFromOffice', true)} />
+            from the office
+          </div>
+        </div>
+
+        <div className="edit-trip-row">
+          <div className='row-title'>
+            Date and time
+          </div>
+
           <Datetime
+            className="cell datepicker"
             defaultValue={this.state.time}
             onChange={date => this._updateInputValue('time', date)} />
-          <label>
-            <input
-              type="radio"
-              name="driveOrRide"
-              className="cell-bottom"
-              checked={this.state.driveOrRide === 'Drive'}
-              onChange={e => this._updateInputValue('driveOrRide', 'Drive')} />
-            Drive
-          </label>
-          <label>
-            <input
-              type="radio"
-              name="driveOrRide"
-              className="cell-bottom"
-              checked={this.state.driveOrRide === 'Ride'}
-              onChange={e => this._updateInputValue('driveOrRide', 'Ride')} />
-            Ride
-          </label>
+
+          <div className="cell padding-top-16">
+            <label className="margin-right-16">
+              <input
+                type="radio"
+                name="driveOrRide"
+                className="margin-right-8"
+                checked={this.state.driveOrRide === 'Drive'}
+                onChange={e => this._updateInputValue('driveOrRide', 'Drive')} />
+              Drive
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="driveOrRide"
+                className="margin-right-8"
+                checked={this.state.driveOrRide === 'Ride'}
+                onChange={e => this._updateInputValue('driveOrRide', 'Ride')} />
+              Ride
+            </label>
+          </div>
+          <div className="cell"></div>
         </div>
 
         <div className="action-buttons">
           <div
             className="button"
             role="button"
-            onClick={this.props.cancelCurrentTrip}>Cancel</div>
+            onClick={this.props.cancelCurrentTrip}>
+            <div className="button-text">
+              CANCEL
+            </div>
+          </div>
           <div
             className="button"
             role="button"
-            onClick={this._saveCurrentTrip.bind(this)}>Save</div>
+            onClick={this._saveCurrentTrip.bind(this)}>
+            <div className="button-text">
+              SAVE
+            </div>
+          </div>
         </div>
       </div>
     );
