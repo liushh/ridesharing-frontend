@@ -80,26 +80,10 @@ LandingPage.propTypes = {
 };
 
 const mapStateToProps = state => {
-  const moment = require('moment');
-
-  const newTrip = {
-    origin: {
-      isOffice: localStorage.getItem('isFromOffice') || false,
-      zipcode: localStorage.getItem('destinationZipcode') || '45050',
-      colonyOrDistrict: localStorage.getItem('originColonyOrDistrict') || 'Jardines del Sol'
-    },
-    destination: {
-      isOffice: localStorage.getItem('isToOffice') || false,
-      zipcode: localStorage.getItem('destinationZipcode') || '94107',
-      colonyOrDistrict: localStorage.getItem('destinationColonyOrDistrict') || 'SOMA'
-    },
-    driveOrRide: 'Ride',
-    time: moment().add(30, 'minutes'),
-  };
   return {
     trips: state.trips,
     currentUser: state.currentUser,
-    currentTrip: newTrip,
+    currentTrip: state.currentTrip,
     tripFilter: state.tripFilter
   };
 };
