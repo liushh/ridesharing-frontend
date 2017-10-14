@@ -11,17 +11,17 @@ export default function CurrentTripReducer(state = null, action) {
       const newTrip = {
         origin: {
           isOffice: (localStorage.getItem('isFromOffice') === 'true') || false,
-          zipcode: localStorage.getItem('destinationZipcode') || '45050',
-          colonyOrDistrict: localStorage.getItem('originColonyOrDistrict') || 'Jardines del Sol'
+          zipcode: localStorage.getItem('originZipcode') || undefined,
+          colonyOrDistrict: localStorage.getItem('originColonyOrDistrict') || undefined
         },
         destination: {
           isOffice: (localStorage.getItem('isToOffice') === 'true') || false,
-          zipcode: localStorage.getItem('destinationZipcode') || '94107',
-          colonyOrDistrict: localStorage.getItem('destinationColonyOrDistrict') || 'SOMA'
+          zipcode: localStorage.getItem('destinationZipcode') || undefined,
+          colonyOrDistrict: localStorage.getItem('destinationColonyOrDistrict') || undefined
         },
         driveOrRide: action.driveOrRide,
         time: moment().add(30, 'minutes'),
-        phone: localStorage.getItem('phone') || null,
+        phone: localStorage.getItem('phone') || undefined,
       };
       return Object.assign({}, newTrip);
     case EDIT_TRIP:

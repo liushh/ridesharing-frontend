@@ -6,8 +6,8 @@ import ReactDataGrid from 'react-data-grid';
 import { SHOW_MY_TRIPS } from '../../../actions/show-my-trips';
 
 const GENERAL_TRIP_COLUMNS = [
-  { key: 'origin', name: 'Origin' },
-  { key: 'destination', name: 'Destination' },
+  { key: 'origin', name: 'From' },
+  { key: 'destination', name: 'To' },
   { key: 'time', name: 'Time' },
   { key: 'driveOrRide', name: 'Drive/Ride' },
   { key: 'name', name: 'Name' },
@@ -81,7 +81,7 @@ class TripsTable extends Component {
   }
 
   _formatLocation(location, currentRowData) {
-    if (currentRowData.isOffice) {
+    if (currentRowData[location].isOffice) {
       return 'Office';
     }
     return currentRowData[location].colonyOrDistrict.concat(' - ', currentRowData[location].zipcode);

@@ -3,8 +3,6 @@ import PropTypes from 'prop-types';
 
 import Datetime from 'react-datetime';
 
-const moment = require('moment');
-
 const officeZipcode = '45050';
 const officeColony = 'Jardines del Sol';
 
@@ -51,7 +49,6 @@ class EditTrip extends Component {
       if (stateObject.isToOffice) {
         stateObject.isFromOffice = false;
       }
-      
     } else if (stateName === 'isFromOffice') {
       stateObject.originZipcode = officeZipcode;
       stateObject.originColonyOrDistrict = officeColony;
@@ -112,21 +109,20 @@ class EditTrip extends Component {
             TO THE OFFICE
           </div>
           <input
-            placeholder="Zipcode"
-            value={this.state.destinationZipcode}
-            className="cell"
-            onChange={e => this._updateInputValue('destinationZipcode', e.target.value)} />
-          <input
             placeholder="Neighborhood*"
             value={this.state.destinationColonyOrDistrict}
             className="cell"
             onChange={e => this._updateInputValue('destinationColonyOrDistrict', e.target.value)} />
-          
+          <input
+            placeholder="Zipcode"
+            value={this.state.destinationZipcode}
+            className="cell"
+            onChange={e => this._updateInputValue('destinationZipcode', e.target.value)} />
         </div>
 
         <div className="edit-trip-row">
           <div className='row-title'>
-            FROM          
+            FROM
           </div>
           <div className="cell-small">
             <input
@@ -135,17 +131,17 @@ class EditTrip extends Component {
                 checked={this.state.isFromOffice}
                 onChange={e => this._updateInputValue('isFromOffice', !this.state.isFromOffice)} />
             FROM THE OFFICE
-          </div>  
-          <input
-            placeholder="Zipcode"
-            value={this.state.originZipcode}
-            className="cell"
-            onChange={e => this._updateInputValue('originZipcode', e.target.value)} />
+          </div>
           <input
             placeholder="Neighborhood*"
             value={this.state.originColonyOrDistrict}
             className="cell"
             onChange={e => this._updateInputValue('originColonyOrDistrict', e.target.value)} />
+          <input
+            placeholder="Zipcode"
+            value={this.state.originZipcode}
+            className="cell"
+            onChange={e => this._updateInputValue('originZipcode', e.target.value)} />
         </div>
 
         <div className="edit-trip-row">
