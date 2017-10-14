@@ -10,20 +10,19 @@ export default function CurrentTripReducer(state = null, action) {
     case CREATE_TRIP:
       const newTrip = {
         origin: {
-          isOffice: localStorage.getItem('isFromOffice') || false,
+          isOffice: (localStorage.getItem('isFromOffice') === 'true') || false,
           zipcode: localStorage.getItem('destinationZipcode') || '45050',
           colonyOrDistrict: localStorage.getItem('originColonyOrDistrict') || 'Jardines del Sol'
         },
         destination: {
-          isOffice: localStorage.getItem('isToOffice') || false,
+          isOffice: (localStorage.getItem('isToOffice') === 'true') || false,
           zipcode: localStorage.getItem('destinationZipcode') || '94107',
           colonyOrDistrict: localStorage.getItem('destinationColonyOrDistrict') || 'SOMA'
         },
         driveOrRide: action.driveOrRide,
         time: moment().add(30, 'minutes'),
+        phone: localStorage.getItem('phone') || null,
       };
-      console.log('newTrip.time = ', newTrip.time);
-      console.log('newTrip.time.format = ', newTrip.time.format('YYYY/M/D HH:mm'));
       return Object.assign({}, newTrip);
     case EDIT_TRIP:
       return Object.assign({}, action.trip);

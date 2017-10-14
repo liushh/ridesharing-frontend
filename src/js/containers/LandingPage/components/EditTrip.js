@@ -34,7 +34,8 @@ class EditTrip extends Component {
 
       time: props.currentTrip.time,
       isFromOffice: props.currentTrip.origin.isOffice,
-      isToOffice: props.currentTrip.destination.isOffice
+      isToOffice: props.currentTrip.destination.isOffice,
+      phone: props.currentTrip.phone
     };
 
     return stateObject;
@@ -46,11 +47,18 @@ class EditTrip extends Component {
     if (stateName === 'isToOffice') {
       stateObject.destinationZipcode = officeZipcode;
       stateObject.destinationColonyOrDistrict = officeColony;
-      stateObject.isFromOffice = false;
+      stateObject.isToOffice = newValue;
+      if (stateObject.isToOffice) {
+        stateObject.isFromOffice = false;
+      }
+      
     } else if (stateName === 'isFromOffice') {
       stateObject.originZipcode = officeZipcode;
       stateObject.originColonyOrDistrict = officeColony;
-      stateObject.isToOffice = false;
+      stateObject.isFromOffice = newValue;
+      if (stateObject.isFromOffice) {
+        stateObject.isToOffice = false;
+      }
     }
     this.setState(stateObject);
   }
@@ -60,7 +68,7 @@ class EditTrip extends Component {
       id: this.props.currentTrip.id,
       name: this.props.currentUser.name,
       email: this.props.currentUser.email,
-      phone: this.props.currentUser.phone,
+      phone: this.props.currentTrip.phone,
       driveOrRide: this.state.driveOrRide,
       time: this.state.time.utc().format('YYYY-M-DDTHH:mm:00 Z'),
       origin: {
@@ -85,6 +93,7 @@ class EditTrip extends Component {
     localStorage.setItem('isToOffice', this.state.isToOffice);
     localStorage.setItem('destinationZipcode', this.state.destinationZipcode);
     localStorage.setItem('destinationColonyOrDistrict', this.state.destinationColonyOrDistrict);
+    localStorage.setItem('phone', this.state.phone);
   }
 
   render() {
@@ -92,7 +101,15 @@ class EditTrip extends Component {
       <div className="edit-trip-container">
         <div className="edit-trip-row">
           <div className='row-title'>
-            Destination
+            TO
+          </div>
+          <div className="cell-small">
+            <input
+                type="checkbox"
+                className="margin-right-8"
+                checked={this.state.isToOffice}
+                onChange={e => this._updateInputValue('isToOffice', !this.state.isToOffice)} />
+            TO THE OFFICE
           </div>
           <input
             placeholder="Zipcode"
@@ -104,20 +121,20 @@ class EditTrip extends Component {
             value={this.state.destinationColonyOrDistrict}
             className="cell"
             onChange={e => this._updateInputValue('destinationColonyOrDistrict', e.target.value)} />
-          <div className="cell">
-            <input
-                type="radio"
-                name="isOffice"
-                className="margin-right-8"
-                checked={this.state.isToOffice}
-                onChange={e => this._updateInputValue('isToOffice', true)} />
-            to the office
-          </div>
+          
         </div>
 
         <div className="edit-trip-row">
           <div className='row-title'>
-            Origin
+            FROM          
+          </div>
+          <div className="cell-small">
+            <input
+                type="checkbox"
+                className="margin-right-8"
+                checked={this.state.isFromOffice}
+                onChange={e => this._updateInputValue('isFromOffice', !this.state.isFromOffice)} />
+            FROM THE OFFICE
           </div>  
           <input
             placeholder="Zipcode"
@@ -129,26 +146,21 @@ class EditTrip extends Component {
             value={this.state.originColonyOrDistrict}
             className="cell"
             onChange={e => this._updateInputValue('originColonyOrDistrict', e.target.value)} />
-          <div className="cell">
-            <input
-                type="radio"
-                name="isOffice"
-                className="margin-right-8"
-                checked={this.state.isFromOffice}
-                onChange={e => this._updateInputValue('isFromOffice', true)} />
-            from the office
-          </div>
         </div>
 
         <div className="edit-trip-row">
           <div className='row-title'>
-            Date and time
+            WHEN
           </div>
-
           <Datetime
-            className="cell datepicker"
+            className="cell-small datepicker"
             defaultValue={this.state.time}
             onChange={date => this._updateInputValue('time', date)} />
+          <input
+            placeholder="Phone"
+            value={this.state.phone}
+            className="cell"
+            onChange={e => this._updateInputValue('phone', e.target.value)} />
 
           <div className="cell padding-top-16">
             <label className="margin-right-16">
@@ -170,7 +182,6 @@ class EditTrip extends Component {
               Ride
             </label>
           </div>
-          <div className="cell"></div>
         </div>
 
         <div className="action-buttons">
